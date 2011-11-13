@@ -12,8 +12,6 @@ public class Book extends LibraryItem {
 		// TODO Auto-generated constructor stub
 	}
 
-	
-	
 	/**
 	 * @param code
 	 * @param title
@@ -23,9 +21,10 @@ public class Book extends LibraryItem {
 	 * @param publisherName
 	 * @param edition
 	 */
-	public Book(String code, String title, Date pubDate, boolean onLoan,
-			String author, String publisherName, int edition) {
-		super(code, title, pubDate, onLoan);
+	public Book(String code, String title, Date pubDate, boolean onLoan, String author, String publisherName, int edition) {
+//	public Book(String code, String title, Date pubDate, String author, String publisherName, int edition) {
+		
+		super(code, title, pubDate, false);
 		this.author = author;
 		this.publisherName = publisherName;
 		this.edition = edition;

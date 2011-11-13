@@ -58,6 +58,7 @@ public class Menu {
 	
 	public int getUserSelection() {
         Console console = System.console();
+        assert console != null : "You need to run the program from the command line to get user input!!!";
         String input;
         int choice;
         do {

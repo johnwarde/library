@@ -5,7 +5,7 @@ import java.util.Date;
 public class Periodical extends LibraryItem {
 
 	protected String 		author;
-	protected Date 			periodicalName;	
+	protected String 		periodicalName;	
 // TODO: create PagesRage class?
 //	protected PagesRange 	pagesRange;	
 	
@@ -25,7 +25,7 @@ public class Periodical extends LibraryItem {
 	 * @param periodicalName
 	 */
 	public Periodical(String code, String title, Date pubDate, boolean onLoan,
-			String author, Date periodicalName) {
+			String author, String periodicalName) {
 		super(code, title, pubDate, onLoan);
 		this.author = author;
 		this.periodicalName = periodicalName;
@@ -51,14 +51,14 @@ public class Periodical extends LibraryItem {
 	/**
 	 * @return the periodicalName
 	 */
-	public Date getPeriodicalName() {
+	public String getPeriodicalName() {
 		return periodicalName;
 	}
 
 	/**
 	 * @param periodicalName the periodicalName to set
 	 */
-	public void setPeriodicalName(Date periodicalName) {
+	public void setPeriodicalName(String periodicalName) {
 		this.periodicalName = periodicalName;
 	}
 

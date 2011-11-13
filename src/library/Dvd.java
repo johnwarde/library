@@ -12,7 +12,7 @@ import java.util.Date;
 public class Dvd extends LibraryItem {
 
 	protected String 	artist;
-	protected Date 		genre;	
+	protected String 	genre;	
 	
 	/**
 	 * 
@@ -32,7 +32,7 @@ public class Dvd extends LibraryItem {
 	 * @param genre
 	 */
 	public Dvd(String code, String title, Date pubDate, boolean onLoan,
-			String artist, Date genre) {
+			String artist, String genre) {
 		super(code, title, pubDate, onLoan);
 		this.artist = artist;
 		this.genre = genre;
@@ -57,14 +57,14 @@ public class Dvd extends LibraryItem {
 	/**
 	 * @return the genre
 	 */
-	public Date getGenre() {
+	public String getGenre() {
 		return genre;
 	}
 
 	/**
 	 * @param genre the genre to set
 	 */
-	public void setGenre(Date aGenre) {
+	public void setGenre(String aGenre) {
 		this.genre = aGenre;
 	}
 	
