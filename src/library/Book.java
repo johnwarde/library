@@ -6,7 +6,7 @@ public class Book extends LibraryItem {
 
 	protected String 	author;
 	protected String 	publisherName;
-	protected String 	edition;
+	protected int  		edition;
 	
 	public Book() {
 		// TODO Auto-generated constructor stub
@@ -24,7 +24,7 @@ public class Book extends LibraryItem {
 	 * @param edition
 	 */
 	public Book(String code, String title, Date pubDate, boolean onLoan,
-			String author, String publisherName, String edition) {
+			String author, String publisherName, int edition) {
 		super(code, title, pubDate, onLoan);
 		this.author = author;
 		this.publisherName = publisherName;
@@ -64,15 +64,15 @@ public class Book extends LibraryItem {
 	/**
 	 * @return the edition
 	 */
-	public String getEdition() {
+	public int getEdition() {
 		return edition;
 	}
 
 	/**
 	 * @param edition the edition to set
 	 */
-	public void setEdition(String anEdition) {
-		this.edition = anEdition;
+	public void setEdition(int editionNo) {
+		this.edition = editionNo;
 	}
 
 	/* (non-Javadoc)

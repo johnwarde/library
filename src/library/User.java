@@ -14,12 +14,19 @@ public class User {
 	protected String address;
 	// TO DO: object for storing LibraryItems
 	// private obj? onLoan
+
 	/**
-	 * 
+	 * @param libraryId
+	 * @param name
+	 * @param address
 	 */
-	public User() {
-		// TODO Auto-generated constructor stub
+	public User(int libraryId, String name, String address) {
+		super();
+		this.libraryId = libraryId;
+		this.name = name;
+		this.address = address;
 	}
+		
 	/**
 	 * @return the libraryId
 	 */
