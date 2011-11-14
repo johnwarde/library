@@ -41,7 +41,7 @@ public class Menu {
 		}
 		String header = String.format("\r\n\r\n\t%s\r\n\t%s\r\n\r\n", menuTitle, this.getUnderline(menuTitle.length(), "="));
 		String menuDetail = "";
-		int menuOptionCount = 1;
+		int menuOptionCount = 0;
 		for (String menuEntry : menuOptions) {
 			menuDetail += String.format("\t%2d.  %s\r\n", menuOptionCount, menuEntry);
 			menuOptionCount++;
@@ -50,7 +50,7 @@ public class Menu {
 	}
 	
 	public boolean isValidChoice(int choice) {
-		if (choice < 1 || choice > menuOptions.length) {
+		if (choice < 0 || choice > (menuOptions.length - 1)) {
 			return false;
 		}
 		return true;
@@ -59,22 +59,22 @@ public class Menu {
 	public int getUserSelection() {
         Console console = System.console();
         assert console != null : "You need to run the program from the command line to get user input!!!";
-        String input;
-        int choice;
+        String input = "";
+        int choice = -1;
         do {
         	try {
             	input = console.readLine();
-            	//System.out.println(String.format("input = [%s]", input));
-            	choice = Integer.parseInt(input);				
+            	choice = Integer.parseInt(input);	
 			} catch (Exception e) {
-				// TODO: print error message?
-				choice = 0;
+				//System.out.print(String.format("Exception: input = [%s]", input));
+				choice = -1;
 			}
+			//System.out.print(String.format("choice = [%d]", choice));        	
         } while (!this.isValidChoice(choice));
 		return choice;
 	}
 	
 	public String getSelectedText(int choice) {
-		return menuOptions[choice - 1];
+		return menuOptions[choice];
 	}
 }

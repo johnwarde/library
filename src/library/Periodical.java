@@ -64,4 +64,34 @@ public class Periodical extends LibraryItem {
 
 
 
+
+	/* (non-Javadoc)
+	 * @see library.OutputStrategy#toConsoleLine()
+	 */
+	@Override
+	public String toConsoleLine() {
+		String out = String.format("%-8s %c   %-10s %-26s %-15s", 
+				getCode(),
+				isOnLoan() ? 'Y' : 'N',
+			    "Periodical",
+				getTitle(),
+				getAuthor()
+				);
+		return out;
+	}
+
+
+
+
+	/* (non-Javadoc)
+	 * @see library.OutputStrategy#toConsoleFull()
+	 */
+	@Override
+	public String toConsoleFull() {
+		// TODO Auto-generated method stub
+		return "TODO: for Periodical";
+	}
+
+
+
 }

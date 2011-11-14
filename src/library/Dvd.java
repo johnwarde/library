@@ -67,5 +67,35 @@ public class Dvd extends LibraryItem {
 	public void setGenre(String aGenre) {
 		this.genre = aGenre;
 	}
+
+
+
+	/* (non-Javadoc)
+	 * @see library.OutputStrategy#toConsoleLine()
+	 */
+	@Override
+	public String toConsoleLine() {
+		String out = String.format("%-8s %c   %-10s %-26s %-15s", 
+				getCode(),
+				isOnLoan() ? 'Y' : 'N',
+			    "DVD",
+				getTitle(),
+				getArtist()
+				);
+		return out;
+	}
+
+
+
+	/* (non-Javadoc)
+	 * @see library.OutputStrategy#toConsoleFull()
+	 */
+	@Override
+	public String toConsoleFull() {
+		// TODO Auto-generated method stub
+		return "TODO: for Dvd";
+	}
+	
+	
 	
 }

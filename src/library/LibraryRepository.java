@@ -36,8 +36,8 @@ public class LibraryRepository {
 			item = LibraryItemFactory.makeLibraryItem(record);
 			lib.add(item);
 		}
-		String debug = lib.toString();		
-		System.out.println(debug);
+		//String debug = lib.toString();		
+		//System.out.println(debug);
 	}
 }
 

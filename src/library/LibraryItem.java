@@ -9,7 +9,7 @@ import java.util.Date;
  * @author johnwarde
  *
  */
-abstract public class LibraryItem {
+abstract public class LibraryItem implements OutputStrategy{
 
 	protected String 	code;
 	protected String 	title;

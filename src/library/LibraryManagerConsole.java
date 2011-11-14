@@ -12,7 +12,6 @@ import library.LibraryRepository;
  *
  */
 public class LibraryManagerConsole {
-
 	/**
 	 * 
 	 */
@@ -25,8 +24,8 @@ public class LibraryManagerConsole {
 	public void init() {
 		// Main loop
 		Menu mainMenu = new Menu("Main Menu", 
-				new String[] {"Library Catalog", "Library Users", "Check-in/Check-out", "Exit"});
-		int choice = 0;
+				new String[] {"Exit", "Library Catalog", "Library Users", "Check-in/Check-out"});
+		int choice = -1;
 		do {
 			System.out.print(mainMenu.getMenuToDisplay());
 			choice = mainMenu.getUserSelection();
@@ -43,63 +42,80 @@ public class LibraryManagerConsole {
 				default:
 					break;
 			}
-		} while (choice != 4);
+		} while (choice != 0);
 	}
 
 	private void showCatalogMenu() {
-		Menu libMenu = new Menu("Library Catalog", 
-				new String[] {"List all items", "List by category", "List available items", "Add new library item"});
-		int choice = 0;
+		Menu libMenu = new Menu("Library Catalog", new String[] {
+				"Return to main menu", 
+				"List all items", 
+				"List by category", 
+				"List available items", 
+				"Add new library item"
+				});
+		int choice = -1;
 		do {
 			System.out.print(libMenu.getMenuToDisplay());
 			choice = libMenu.getUserSelection();
 			switch (choice) {
 				case 1:
-					listAllItems();
+					catalogListAllItems();
 					break;
-				case 2:
-					placeHolderHelper(libMenu.getSelectedText(choice));
-					break;
-				case 3:
-					placeHolderHelper(libMenu.getSelectedText(choice));
+				case 0:
+					// Return to main menu
 					break;
 				default:
-					break;
+					placeHolderHelper(libMenu.getSelectedText(choice));
+					break;					
 			}
-		} while (choice != 4);		
+		} while (choice != 0);		
 	}
 	
 	
 	private void placeHolderHelper(String optionSelected) {
 		System.out.println(
-				String.format("%s has not yet been implemented, returning you to the previous menu", optionSelected));
+				String.format("\r\n\r\n\t %s has not yet been implemented, returning you to the previous menu", optionSelected));
 	}
 
-	private void listAllItems() {
+	private void catalogListAllItems() {
 		LibraryRepository lib =  LibraryRepository.getInstance();
 		Catalog items = lib.getCatalog();
+		System.out.print(String.format("\r\n\r\n" + 
+			"Choice Library  On                                        Author/\r\n" + 
+			"  No.   Code   Loan Type       Title                      Artist\r\n" + 
+			"------ ------- ---- ---------- -------------------------- --------------\r\n"));
 		LibraryItem item;
 		items.first();
+		int count = 1;
 		while (items.hasNext()) {
 			item = items.getCurrent();
-			System.out.println(item.toString());
+			System.out.println(String.format("%6d %s", count, item.toConsoleLine()));
 			items.next();
+			count++;
 		}
+		ListContextMenu menu = new ListContextMenu(5, new String[] {
+				"Return to main menu", 
+				"Check-out", 
+				"Check-in", 
+				"Edit item", 
+				"Delete item"});
+		int contextChoice = menu.getUserOption();
+		int listChoice = menu.getListChoice();
+		System.out.print(String.format("Context Choice = %d, listChoice = %d\r\n", contextChoice, listChoice));
 	}
 
 	private void showUsersMenu() {
 		Menu usersMenu = new Menu("Library Users", 
-				new String[] {"List users", "Add user"});
+				new String[] {"Return to main menu", "List users", "Add user"});
 		System.out.print(usersMenu.getMenuToDisplay());
-		System.out.println("Not implemented, returning you to Main Menu ...");
-		
+		System.out.println(String.format("\r\n\tNot implemented, returning you to Main Menu ..."));
 	}
 
 	private void showCheckMenu() {
 		Menu checkMenu = new Menu("Check-in / Check-out", 
-				new String[] {"Check-in item", "Check-out item"});
+				new String[] {"Return to main menu", "Check-in item", "Check-out item"});
 		System.out.print(checkMenu.getMenuToDisplay());
-		System.out.println("Not implemented, returning you to Main Menu ...");		
+		System.out.println(String.format("\r\n\tNot implemented, returning you to Main Menu ..."));
 	}
 
 }

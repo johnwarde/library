@@ -74,6 +74,48 @@ public class Book extends LibraryItem {
 		this.edition = editionNo;
 	}
 
+	
+	
+	
+	/* (non-Javadoc)
+	 * @see library.OutputStrategy#toConsoleLine()
+	 */
+	@Override
+	public String toConsoleLine() {
+		String out = String.format("%-8s %c   %-10s %-26s %-15s", 
+						getCode(),
+						isOnLoan() ? 'Y' : 'N',
+					    "Book",
+						getTitle(),
+						getAuthor()
+						);
+		return out;
+	}
+
+	/* (non-Javadoc)
+	 * @see library.OutputStrategy#toConsoleFull()
+	 */
+	@Override
+	public String toConsoleFull() {
+		String out = String.format(
+				"Code:\t\t%s\r\n" + 
+				"On Loan:\t\t%s\r\n" +
+				"Title:\t\t%s\r\n" +
+				"Published:\t\t%s\r\n" +
+				"Author:\t\t%s\r\n" +
+				"Publisher:\t\t%s\r\n" +
+				"Edition:\t\t%d\r\n", 
+				getCode(), 
+				isOnLoan() ? "Yes" : "No",
+				getTitle(),
+				getPubDate(),
+				getAuthor(),
+				getPublisherName(),
+				getEdition()
+				);
+		return out;		
+	}
+
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
