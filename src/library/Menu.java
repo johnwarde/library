@@ -23,7 +23,7 @@ public class Menu {
 		menuOptions = listOfMenuOptions;
 	}
 
-	public String getUnderline(int times, String aFormat) {
+	private String getUnderline(int times, String aFormat) {
 	   StringBuilder underline = new StringBuilder();
 	   for(int i = 0;i < times;i++) {
 		   underline.append("=");		
@@ -72,5 +72,9 @@ public class Menu {
 			}
         } while (!this.isValidChoice(choice));
 		return choice;
+	}
+	
+	public String getSelectedText(int choice) {
+		return menuOptions[choice - 1];
 	}
 }

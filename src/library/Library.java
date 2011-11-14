@@ -3,7 +3,6 @@
  */
 package library;
 
-import library.Menu;
 import library.User;
 
 /**
@@ -11,18 +10,24 @@ import library.User;
  *
  */
 public class Library {
-	static Catalog lib;
+	//static Catalog lib;
 
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
 		// TODO Clean this up
-		System.out.println("Library System Start");
+		System.out.println("Library System starting up ... ");
 		System.out.println();
-		lib = new Catalog();
-		loadData();
+		
+		LibraryManagerConsole mgr = new LibraryManagerConsole();
+		mgr.init();
 
+		System.out.println();		
+		System.out.println("Library System shutting down ... ");
+		
+		loadData();
+		
 		/*
 		Calendar cal = Calendar.getInstance();
 		cal.set(2011, 1, 9);
@@ -42,11 +47,6 @@ public class Library {
 		System.out.println(aBook.toString());
 */
 		
-		String[] mainMenuOptions = {"One", "Two", "Three"};
-		Menu mainMenu = new Menu("Main Menu", mainMenuOptions);
-		System.out.print(mainMenu.getMenuToDisplay());
-		int choice = mainMenu.getUserSelection();
-		System.out.print(choice);
 	}
 	
 
@@ -55,6 +55,7 @@ public class Library {
 	 * @return
 	 */
 	static private boolean loadData() {
+/*
 		Object[][] csv = {
 				// Type,     code,     onLoan, pubDate,      title,        author,      publisherName, edition, 
 				 {"Book", "SKU001", false, "01/01/2011", "First Book", "John Warde", "O'Reilly", 1},
@@ -72,13 +73,17 @@ public class Library {
 			item = LibraryItemFactory.makeLibraryItem(record);
 			lib.add(item);
 		}
-
+*/
+		
 		// TODO: Do I need to create and class to retain all users?
+		
 		User[] users = {
 				new User(1, "Johnny Fenton", "Cork"),
 				new User(2, "Elvis Presley", "Graceland"),
 				new User(2, "Elvis Presley", "Graceland"),
 		};
+		System.out.println(users);
+
 		return true;
 	}
 	

@@ -11,8 +11,10 @@ import java.util.ArrayList;
  * @author johnwarde
  *
  */
+//public class Catalog {
 public class Catalog implements Traverser {
-	private ArrayList<LibraryItem> items = new ArrayList<LibraryItem>();;
+	private ArrayList<LibraryItem> items = new ArrayList<LibraryItem>();
+	private int currentIndex = 0;
 	
 	public Catalog() {
 		super();
@@ -46,8 +48,7 @@ public class Catalog implements Traverser {
 	 */
 	@Override
 	public void first() {
-		// TODO Auto-generated method stub
-
+		currentIndex = 0;
 	}
 
 	/* (non-Javadoc)
@@ -56,7 +57,7 @@ public class Catalog implements Traverser {
 	@Override
 	public void next() {
 		// TODO Auto-generated method stub
-
+		currentIndex++;
 	}
 
 	/* (non-Javadoc)
@@ -64,7 +65,9 @@ public class Catalog implements Traverser {
 	 */
 	@Override
 	public boolean hasNext() {
-		// TODO Auto-generated method stub
+		if (currentIndex < items.size()) {
+			return true;
+		}
 		return false;
 	}
 
@@ -72,9 +75,8 @@ public class Catalog implements Traverser {
 	 * @see library.Traverser#getCurrent()
 	 */
 	@Override
-	public Object getCurrent() {
-		// TODO Auto-generated method stub
-		return null;
+	public LibraryItem getCurrent() {
+		return (LibraryItem) items.get(currentIndex);
 	}
 
 }
