@@ -20,7 +20,9 @@ public class Catalog implements Traverser {
 		super();
 	}
 
-	
+	public LibraryItem getIndex(int entryNo) {
+		return items.get(entryNo);
+	}
 	
 	protected boolean add(LibraryItem toAdd) {
 		// TODO: validate: does it already exist

@@ -21,8 +21,6 @@ public class Dvd extends LibraryItem {
 		// TODO Auto-generated constructor stub
 	}
 
-	
-	
 	/**
 	 * @param code
 	 * @param title

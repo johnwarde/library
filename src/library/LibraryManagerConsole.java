@@ -93,6 +93,41 @@ public class LibraryManagerConsole {
 			items.next();
 			count++;
 		}
+		ListChoice lc = new ListChoice(count - 1);
+		System.out.println(lc.getMenuToDisplay());
+		int choice = lc.getUserOption();
+		if (0 == choice) {
+			return;
+		}
+		// Show the selected item
+		LibraryItem selected = items.getIndex(choice);
+		System.out.println(selected.toConsoleFull());
+
+		Menu menu = new Menu("Library Item Menu", new String[] {
+				"Return to main menu", 
+				"Check-out", 
+				"Check-in", 
+				"Edit item", 
+				"Delete item"});
+		choice = -1;
+		do {
+			System.out.print(menu.getMenuToDisplay());
+			choice = menu.getUserSelection();
+			switch (choice) {
+				case 3:
+					//EditItem(selected);
+					break;
+				case 0:
+					// Return to previous menu
+					break;
+				default:
+					placeHolderHelper(menu.getSelectedText(choice));
+					break;					
+			}
+		} while (choice != 0);	
+		
+		
+/*		
 		ListContextMenu menu = new ListContextMenu(5, new String[] {
 				"Return to main menu", 
 				"Check-out", 
@@ -102,6 +137,7 @@ public class LibraryManagerConsole {
 		int contextChoice = menu.getUserOption();
 		int listChoice = menu.getListChoice();
 		System.out.print(String.format("Context Choice = %d, listChoice = %d\r\n", contextChoice, listChoice));
+*/
 	}
 
 	private void showUsersMenu() {
