@@ -25,7 +25,7 @@ public class LibraryItemFactory {
 	
 	public static LibraryItem makeLibraryItem(Object[] params) {
 		String  code 	= (String) params[1];
-		boolean onLoan 	= (boolean) params[2];
+		boolean onLoan 	= (Boolean) params[2];
 		Date pubDate = null; 
 		try {  
 			DateFormat formatter ; 
@@ -40,7 +40,7 @@ public class LibraryItemFactory {
 		if (params[0].equals("Book")) {
 			String author = (String) params[5];
 			String publisherName = (String) params[6];
-			int edition = (int) params[7];
+			int edition = (Integer) params[7];
 			return new Book(code, title, pubDate, onLoan, author, publisherName, edition);
 		}
 		if (params[0].equals("Dvd")) {
