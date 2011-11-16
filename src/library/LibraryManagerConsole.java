@@ -100,7 +100,7 @@ public class LibraryManagerConsole {
 			return;
 		}
 		// Show the selected item
-		LibraryItem selected = items.getIndex(choice);
+		LibraryItem selected = items.getIndex(choice - 1);
 		System.out.println(selected.toConsoleFull());
 
 		Menu menu = new Menu("Library Item Menu", new String[] {
