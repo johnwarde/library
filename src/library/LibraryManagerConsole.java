@@ -64,6 +64,9 @@ public class LibraryManagerConsole {
 				case 2:
 					catalogListByCategory();
 					break;
+				case 3:
+					catalogListAvailableByCategory();
+					break;					
 				case 0:
 					// Return to main menu
 					break;
@@ -75,6 +78,11 @@ public class LibraryManagerConsole {
 	}
 	
 	
+	private void catalogListAvailableByCategory() {
+		// TODO Auto-generated method stub
+		
+	}
+
 	private void catalogListByCategory() {
 		LibraryRepository lib =  LibraryRepository.getInstance();
 		Catalog items = lib.getCatalog();
@@ -82,8 +90,29 @@ public class LibraryManagerConsole {
 			System.out.println("There are no items in the library catalog, returning you to the previous menu.");
 			return;
 		}
-		Catalog sortItems = items.sortByCategory();
 		
+		Menu menu = new Menu("List by Category Menu", new String[] {
+				"Return to main menu", 
+				"List all Books", 
+				"List all DVDs", 
+				"List all Periodicals"
+				});
+		int choice = -1;
+		do {
+			System.out.print(menu.getMenuToDisplay());
+			choice = menu.getUserSelection();
+			switch (choice) {
+				case 1:
+					//EditItem(selected);
+					break;
+				case 0:
+					// Return to previous menu
+					break;
+				default:
+					placeHolderHelper(menu.getSelectedText(choice));
+					break;					
+			}
+		} while (choice != 0);	
 		
 		System.out.print(String.format("\r\n\r\n" + 
 			"Choice Library  On                                        Author/\r\n" + 
