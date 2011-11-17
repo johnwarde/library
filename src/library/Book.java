@@ -32,14 +32,6 @@ public class Book extends LibraryItem {
 
 
 
-	/* (non-Javadoc)
-	 * @see library.LibraryItem#getTypeForDisplay()
-	 */
-	@Override
-	public String getTypeForDisplay() {
-		return "Book";
-	}
-
 	/**
 	 * @return the author
 	 */
@@ -107,15 +99,15 @@ public class Book extends LibraryItem {
 	public String toConsoleFull() {
 		String out = String.format(
 				"\r\n\r\n" + 
-				"Item:\t\t%s\r\n" + 
-				"Code:\t\t%s\r\n" + 
-				"On Loan:\t%s\r\n" +
-				"Title:\t\t%s\r\n" +
-				"Published:\t%s\r\n" +
-				"Author:\t\t%s\r\n" +
-				"Publisher:\t%s\r\n" +
-				"Edition:\t%d\r\n", 
-				getTypeForDisplay(),
+				"Item:\t\t\t%s\r\n" + 
+				"Code:\t\t\t%s\r\n" + 
+				"On Loan:\t\t%s\r\n" +
+				"Title:\t\t\t%s\r\n" +
+				"Published:\t\t%s\r\n" +
+				"Author:\t\t\t%s\r\n" +
+				"Publisher:\t\t%s\r\n" +
+				"Edition:\t\t%d\r\n", 
+				"Book",
 				getCode(), 
 				isOnLoan() ? "Yes" : "No",
 				getTitle(),
@@ -137,4 +129,9 @@ public class Book extends LibraryItem {
 				+ title + ", pubDate=" + pubDate + ", onLoan=" + onLoan + "]";
 	}
 
+/*
+	public static String getTypeToDisplay() {
+		return "Book";
+	}
+*/
 }

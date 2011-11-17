@@ -61,6 +61,9 @@ public class LibraryManagerConsole {
 				case 1:
 					catalogListAllItems();
 					break;
+				case 2:
+					catalogListByCategory();
+					break;
 				case 0:
 					// Return to main menu
 					break;
@@ -72,6 +75,32 @@ public class LibraryManagerConsole {
 	}
 	
 	
+	private void catalogListByCategory() {
+		LibraryRepository lib =  LibraryRepository.getInstance();
+		Catalog items = lib.getCatalog();
+		if (0 == items.size()) {
+			System.out.println("There are no items in the library catalog, returning you to the previous menu.");
+			return;
+		}
+		Catalog sortItems = items.sortByCategory();
+		
+		
+		System.out.print(String.format("\r\n\r\n" + 
+			"Choice Library  On                                        Author/\r\n" + 
+			"  No.   Code   Loan Type       Title                      Artist\r\n" + 
+			"------ ------- ---- ---------- -------------------------- --------------\r\n"));
+		LibraryItem item;
+		items.first();
+		int count = 1;
+		while (items.hasNext()) {
+			item = items.getCurrent();
+			System.out.println(String.format("%6d %s", count, item.toConsoleLine()));
+			items.next();
+			count++;
+		}
+		
+	}
+
 	private void placeHolderHelper(String optionSelected) {
 		System.out.println(
 				String.format("\r\n\r\n\t %s has not yet been implemented, returning you to the previous menu", optionSelected));
@@ -80,6 +109,10 @@ public class LibraryManagerConsole {
 	private void catalogListAllItems() {
 		LibraryRepository lib =  LibraryRepository.getInstance();
 		Catalog items = lib.getCatalog();
+		if (0 == items.size()) {
+			System.out.println("There are no items in the library catalog, returning you to the previous menu.");
+			return;
+		}
 		System.out.print(String.format("\r\n\r\n" + 
 			"Choice Library  On                                        Author/\r\n" + 
 			"  No.   Code   Loan Type       Title                      Artist\r\n" + 

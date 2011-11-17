@@ -36,14 +36,11 @@ public class Dvd extends LibraryItem {
 		this.genre = genre;
 	}
 
-	/* (non-Javadoc)
-	 * @see library.LibraryItem#getTypeForDisplay()
-	 */
-	@Override
-	public String getTypeForDisplay() {
+/*
+	public static String getTypeForDisplay() {
 		return "DVD";
 	}
-
+*/
 	/**
 	 * @return the artist
 	 */
@@ -98,14 +95,14 @@ public class Dvd extends LibraryItem {
 	public String toConsoleFull() {
 		String out = String.format(
 				"\r\n\r\n" + 
-				"Item:\t\t%s\r\n" + 
-				"Code:\t\t%s\r\n" + 
-				"On Loan:\t%s\r\n" +
-				"Title:\t\t%s\r\n" +
-				"Published:\t%s\r\n" +
-				"Artist:\t\t%s\r\n" +
-				"Genre:\t\t%s\r\n", 
-				getTypeForDisplay(),
+				"Item:\t\t\t%s\r\n" + 
+				"Code:\t\t\t%s\r\n" + 
+				"On Loan:\t\t%s\r\n" +
+				"Title:\t\t\t%s\r\n" +
+				"Published:\t\t%s\r\n" +
+				"Artist:\t\t\t%s\r\n" +
+				"Genre:\t\t\t%s\r\n", 
+				"DVD",
 				getCode(), 
 				isOnLoan() ? "Yes" : "No",
 				getTitle(),
@@ -115,7 +112,5 @@ public class Dvd extends LibraryItem {
 				);
 		return out;	
 	}
-	
-	
 	
 }

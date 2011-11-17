@@ -32,14 +32,6 @@ public class Periodical extends LibraryItem {
 	}
 
 
-	/* (non-Javadoc)
-	 * @see library.LibraryItem#getTypeForDisplay()
-	 */
-	@Override
-	public String getTypeForDisplay() {
-		return "Periodical";
-	}
-
 	/**
 	 * @return the author
 	 */
@@ -96,14 +88,14 @@ public class Periodical extends LibraryItem {
 	public String toConsoleFull() {
 		String out = String.format(
 				"\r\n\r\n" + 
-				"Item:\t\t%s\r\n" + 
-				"Code:\t\t%s\r\n" + 
-				"On Loan:\t%s\r\n" +
-				"Title:\t\t%s\r\n" +
-				"Published:\t%s\r\n" +
-				"Author:\t\t%s\r\n" +
+				"Item:\t\t\t%s\r\n" + 
+				"Code:\t\t\t%s\r\n" + 
+				"On Loan:\t\t%s\r\n" +
+				"Title:\t\t\t%s\r\n" +
+				"Published:\t\t%s\r\n" +
+				"Author:\t\t\t%s\r\n" +
 				"Periodical Name:\t%s\r\n", 
-				getTypeForDisplay(),
+				"Periodical",
 				getCode(), 
 				isOnLoan() ? "Yes" : "No",
 				getTitle(),
@@ -114,6 +106,9 @@ public class Periodical extends LibraryItem {
 		return out;
 	}
 
-
-
+/*
+	public static String getTypeToDisplay() {
+		return "Periodical";
+	}
+*/
 }

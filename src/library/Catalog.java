@@ -24,6 +24,10 @@ public class Catalog implements Traverser {
 		return items.get(entryNo);
 	}
 	
+	public int size() {
+		return items.size();
+	}	
+	
 	protected boolean add(LibraryItem toAdd) {
 		// TODO: validate: does it already exist
 		items.add(toAdd);
@@ -80,5 +84,6 @@ public class Catalog implements Traverser {
 	public LibraryItem getCurrent() {
 		return (LibraryItem) items.get(currentIndex);
 	}
+
 
 }

@@ -25,8 +25,8 @@ public class LibraryRepository {
 				 {"Book", "SKU002", false, "01/01/2011", "Second Book", "Brian Warde", "O'Reilly",   2},
 				 
 				 // Type,  code,    onLoan, pubDate,      title,     artist, genre
-				 {"Dvd",  "SKU003", false, "12/11/2001", "Monster", "REM",   "Rock"},
-				 {"Dvd",  "SKU004", false, "12/11/2001", "One Tree Hill", "U2",   "Rock"},
+				 {"DVD",  "SKU003", false, "12/11/2001", "Monster", "REM",   "Rock"},
+				 {"DVD",  "SKU004", false, "12/11/2001", "One Tree Hill", "U2",   "Rock"},
 				 
 				 // Type,            code,     onLoan, pubDate,     title,       author,  periodicalName
 				 {"Periodical",  "SKU005", false, "12/04/1996", "Quick one", "Steorn",   "Steorn Monthly"}

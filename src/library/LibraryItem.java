@@ -45,10 +45,12 @@ abstract public class LibraryItem implements OutputStrategy{
 		return code;
 	}
 
-	public String getTypeForDisplay() {
+/*	
+	public static String getTypeForDisplay() {
 		return "need to be overridden in child classes";
 	}
-
+*/
+	
 	public void setCode(String aCode) {
 		this.code = aCode;
 	}

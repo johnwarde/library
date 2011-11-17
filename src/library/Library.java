@@ -20,11 +20,16 @@ public class Library {
 		System.out.println("Library System starting up ... ");
 		System.out.println();
 		
+		// TODO: remove, left here for testing, make sure data is right
+		LibraryRepository lib = LibraryRepository.getInstance(); lib.toString();
+		
 		LibraryManagerConsole mgr = new LibraryManagerConsole();
 		mgr.init();
 
 		System.out.println();		
 		System.out.println("Library System shutting down ... ");
+		
+
 		
 		loadData();
 		

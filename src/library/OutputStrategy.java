@@ -8,6 +8,6 @@ package library;
  *
  */
 public interface OutputStrategy {
-	String toConsoleLine();
-	String toConsoleFull();
+	public String toConsoleLine();
+	public String toConsoleFull();
 }
