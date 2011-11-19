@@ -11,7 +11,6 @@ import java.util.ArrayList;
  * @author johnwarde
  *
  */
-//public class Catalog {
 public class Catalog implements Traverser {
 	private ArrayList<LibraryItem> items = new ArrayList<LibraryItem>();
 	private int currentIndex = 0;
@@ -19,6 +18,7 @@ public class Catalog implements Traverser {
 	public Catalog() {
 		super();
 	}
+
 
 	public LibraryItem getIndex(int entryNo) {
 		return items.get(entryNo);
@@ -34,7 +34,8 @@ public class Catalog implements Traverser {
 		return true;
 	}
 	
-	protected boolean remove(String aCode) {
+	protected boolean remove(LibraryItem toDelete) {
+		items.remove(toDelete);	
 		return true;
 	}
 	
