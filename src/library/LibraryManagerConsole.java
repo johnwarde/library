@@ -100,13 +100,15 @@ public class LibraryManagerConsole {
 					// Return to previous menu
 					break;
 				case 1:
-					//itemsAvailableInCategory = CatalogViewer.getItemsByCategory(items, Book.class);
+					// TODO: fix so that can pass class type, using workaround
+//					itemsAvailableInCategory = CatalogViewer.getItemsByCategory(items, Book.class);
+					itemsAvailableInCategory = CatalogViewer.itemsByCategory(items, new Book());
 					break;
 				case 2:
-					//itemsAvailableInCategory = CatalogViewer.getItemsByCategory(items, Dvd.class);
+					itemsAvailableInCategory = CatalogViewer.itemsByCategory(items, new Dvd());
 					break;
 				case 3:
-					//itemsAvailableInCategory = CatalogViewer.getItemsByCategory(items, Periodical.class);
+					itemsAvailableInCategory = CatalogViewer.itemsByCategory(items, new Periodical());
 					break;
 				default:
 					placeHolderHelper(menu.getSelectedText(choice));
