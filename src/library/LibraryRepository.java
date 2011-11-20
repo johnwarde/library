@@ -4,6 +4,7 @@ public class LibraryRepository {
     private static final LibraryRepository instance = new LibraryRepository();
     private Catalog lib;
     private Members users;
+    private int lastLibraryId = 0;
  
     public static LibraryRepository getInstance() {
             return instance;
@@ -24,6 +25,14 @@ public class LibraryRepository {
     	return users;
     }
     
+	/**
+	 * This new ID needs to be used straight away
+	 * @return the lastLibraryId
+	 */
+	public int getNewLibraryId() {
+		return lastLibraryId++;
+	}
+
 	private void loadData() {
 		Object[][] csv = {
 				 // Type,  code,    onLoan, pubDate,      title,        author,       publisherName, edition, 
@@ -51,13 +60,13 @@ public class LibraryRepository {
 		String name;
 		String address;
 		User userNew;
-		int libraryId = 0;
+//		int libraryId = 0;
 		for (String[] record : csv_users) {
 			name = record[0];
 			address = record[1];
-			userNew = new User(libraryId, name, address);
+			userNew = new User(getNewLibraryId(), name, address);
 			users.add(userNew);
-			libraryId++;
+//			libraryId++;
 		}		
 	}
 }

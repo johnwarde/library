@@ -23,7 +23,7 @@ public class Menu {
 		menuOptions = listOfMenuOptions;
 	}
 
-	private String getUnderline(int times, String aFormat) {
+	private String getUnderline(int times) {
 	   StringBuilder underline = new StringBuilder();
 	   for(int i = 0;i < times;i++) {
 		   underline.append("=");		
@@ -39,7 +39,7 @@ public class Menu {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-		String header = String.format("\r\n\r\n\t%s\r\n\t%s\r\n\r\n", menuTitle, this.getUnderline(menuTitle.length(), "="));
+		String header = String.format("\r\n\r\n\t%s\r\n\t%s\r\n\r\n", menuTitle, this.getUnderline(menuTitle.length()));
 		String menuDetail = "";
 		int menuOptionCount = 0;
 		for (String menuEntry : menuOptions) {

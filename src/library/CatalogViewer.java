@@ -17,6 +17,7 @@ public abstract class CatalogViewer {
 		LibraryItem item;
 		while (items.hasNext()) {
 			item = items.getCurrent();
+//			if (item.getClass() == category) {
 			if (item.getClass() == category.getClass()) {
 				newItems.add(item);
 			}

@@ -20,9 +20,6 @@ public class Library {
 		
 		// TODO: remove, left here for testing, make sure data is right
 		LibraryRepository lib = LibraryRepository.getInstance(); lib.toString();
-
-		User selected = lib.getUsers().getIndex(2);
-		System.out.println(selected.toConsoleFull());
 		
 		LibraryManagerConsole mgr = new LibraryManagerConsole();
 		mgr.init();

@@ -221,10 +221,10 @@ public class LibraryManagerConsole {
 							// TODO: Check-out
 						}
 						break;
-//					case 2:
-//						editLibraryItem(selected);
-//						// TODO: maybe just need to go back to list of items
-//						break;					
+					case 2:
+						editLibraryItem(selected);
+						// TODO: maybe just need to go back to list of items
+						break;					
 					case 3:
 						deleteLibraryItem(selected, items);
 						break;	
@@ -234,6 +234,20 @@ public class LibraryManagerConsole {
 				}
 			}
 		}
+	}
+
+	private void editLibraryItem(LibraryItem selected) {
+		
+//		Confirmation ui = new Confirmation("Are you sure you want to delete this library item? (y/n)");
+//		if (ui.getUserChoice()) {
+//			subset.remove(selected);
+//			LibraryRepository lib =  LibraryRepository.getInstance();
+//			Catalog items = lib.getCatalog();
+//			if (subset != items) {
+//				items.remove(selected);				
+//			}
+//		}
+		
 	}
 
 	private void deleteLibraryItem(LibraryItem selected, Catalog subset) {
@@ -270,10 +284,10 @@ public class LibraryManagerConsole {
 //					Members usersWithLoans = MembersViewer.usersWithLoans();
 //					usersList(members);
 //					break;
-//				case 3:
-//					// Add user
-//					userAdd();
-//					break;					
+				case 3:
+					// Add user
+					userAdd();
+					break;					
 				case 0:
 					// Return to main menu
 					break;
@@ -283,6 +297,7 @@ public class LibraryManagerConsole {
 			}
 		}		
 	}
+
 
 	private void usersList(Members users) {
 		int itemChoosen = -1;
@@ -332,14 +347,12 @@ public class LibraryManagerConsole {
 					case 1:
 						// List all library items on loan
 						break;
-//					case 2:
-//						// TODO: Edit User
-//						editUser(selected);
-//						break;					
-//					case 3:
-//						// TODO: Delete User
-//						deleteUser(selected, users);
-//						break;	
+					case 2:
+						editUser(selected);
+						break;					
+					case 3:
+						deleteUser(selected, users);
+						break;	
 					default:
 						placeHolderHelper(menu.getSelectedText(menuChoice));
 						break;					
@@ -347,6 +360,49 @@ public class LibraryManagerConsole {
 			}
 		}
 		
+	}
+
+
+	private void userAdd() {
+		Form userDetailsForm = new Form("New User");
+		//                        UI id, prompt, default value 
+		userDetailsForm.addField("name", "Name", "");
+		userDetailsForm.addField("addr", "Address", "");
+		userDetailsForm.userFill();
+		String newName = (String) userDetailsForm.getFieldValue("name");
+		String newAddr = (String) userDetailsForm.getFieldValue("addr");
+		LibraryRepository lib =  LibraryRepository.getInstance();
+		Members users = lib.getUsers();		
+		User toAdd = new User(lib.getNewLibraryId(), newName, newAddr);
+		toAdd.setName(newName);
+		toAdd.setAddress(newAddr);		
+		users.add(toAdd);
+	}	
+	
+
+	private void editUser(User selected) {
+		Form userDetailsForm = new Form("Edit User");
+		//                        UI id, prompt, default value 
+		userDetailsForm.addField("name", "Name", selected.getName());
+		userDetailsForm.addField("addr", "Address", selected.getAddress());
+		userDetailsForm.userFill();
+		String newName = (String) userDetailsForm.getFieldValue("name");
+		String newAddr = (String) userDetailsForm.getFieldValue("addr");	
+		selected.setName(newName);
+		selected.setAddress(newAddr);
+	}
+	
+	
+	private void deleteUser(User selected, Members subset) {
+		Confirmation ui = new Confirmation("Are you sure you want to delete this user? (y/n)");
+		if (ui.getUserChoice()) {
+			subset.remove(selected);
+			LibraryRepository lib =  LibraryRepository.getInstance();
+			Members users = lib.getUsers();
+			if (subset != users) {
+				users.remove(selected);				
+			}
+		}
 	}
 	
 }
