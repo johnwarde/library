@@ -3,6 +3,7 @@ package library;
 public class LibraryRepository {
     private static final LibraryRepository instance = new LibraryRepository();
     private Catalog lib;
+    private Members users;
  
     public static LibraryRepository getInstance() {
             return instance;
@@ -11,11 +12,16 @@ public class LibraryRepository {
     // Private constructor prevents instantiation from other classes
     private LibraryRepository() { 
     	lib = new Catalog();
+    	users = new Members();
     	loadData();
     }
     
     public Catalog getCatalog() {
     	return lib;
+    }
+    
+    public Members getUsers() {
+    	return users;
     }
     
 	private void loadData() {
@@ -36,8 +42,23 @@ public class LibraryRepository {
 			item = LibraryItemFactory.makeLibraryItem(record);
 			lib.add(item);
 		}
-		//String debug = lib.toString();		
-		//System.out.println(debug);
+		
+		String[][] csv_users = {
+				{"Johnny Fenton", "Cork"},
+				{"Elvis Presley", "Graceland"},
+				{"JB", "Ballinasloe"}
+		};
+		String name;
+		String address;
+		User userNew;
+		int libraryId = 0;
+		for (String[] record : csv_users) {
+			name = record[0];
+			address = record[1];
+			userNew = new User(libraryId, name, address);
+			users.add(userNew);
+			libraryId++;
+		}		
 	}
 }
 

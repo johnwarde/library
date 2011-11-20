@@ -16,9 +16,6 @@ public class LibraryManagerConsole {
 	 * 
 	 */
 	public LibraryManagerConsole() {
-		// TODO initialization?
-		
-		
 	}
 	
 	public void init() {
@@ -47,11 +44,11 @@ public class LibraryManagerConsole {
 				"Return to previous menu", 
 				"List all items", 
 				"List by category", 
-				"List available items", 
+				"List available items by category", 
 				"Add new library item"
 				});
 		int choice = -1;
-		do {
+		while (choice != 0) {
 			System.out.print(libMenu.getMenuToDisplay());
 			choice = libMenu.getUserSelection();
 			switch (choice) {
@@ -76,7 +73,7 @@ public class LibraryManagerConsole {
 					placeHolderHelper(libMenu.getSelectedText(choice));
 					break;					
 			}
-		} while (choice != 0);		
+		}		
 	}
 	
 
@@ -219,9 +216,9 @@ public class LibraryManagerConsole {
 						break;				
 					case 1:
 						if (selected.isOnLoan()) {
-							// Check-in
+							// TODO: Check-in
 						} else {
-							// Check-out
+							// TODO: Check-out
 						}
 						break;
 //					case 2:
@@ -230,7 +227,6 @@ public class LibraryManagerConsole {
 //						break;					
 					case 3:
 						deleteLibraryItem(selected, items);
-						// TODO: maybe just need to go back to list of items
 						break;	
 					default:
 						placeHolderHelper(menu.getSelectedText(menuChoice));
@@ -258,9 +254,99 @@ public class LibraryManagerConsole {
 							  "List all users", 
 							  "List users with loans", 
 							  "Add user"});
-		System.out.print(usersMenu.getMenuToDisplay());
-		System.out.println(String.format("\r\n\tNot implemented, returning you to Main Menu ..."));
+		int choice = -1;
+		while (choice != 0) {
+			System.out.print(usersMenu.getMenuToDisplay());
+			choice = usersMenu.getUserSelection();
+			switch (choice) {
+				case 1:
+					// List all users	
+					LibraryRepository lib = LibraryRepository.getInstance();
+					Members members = lib.getUsers();						
+					usersList(members);
+					break;
+//				case 2:
+//					// List users with loans
+//					Members usersWithLoans = MembersViewer.usersWithLoans();
+//					usersList(members);
+//					break;
+//				case 3:
+//					// Add user
+//					userAdd();
+//					break;					
+				case 0:
+					// Return to main menu
+					break;
+				default:
+					placeHolderHelper(usersMenu.getSelectedText(choice));
+					break;					
+			}
+		}		
 	}
 
-
+	private void usersList(Members users) {
+		int itemChoosen = -1;
+		int menuChoice  = -1;
+		while (itemChoosen != 0) {
+			if (0 == users.size()) {
+				System.out.println();
+				System.out.println("There are no users to list, returning to the previous menu.");
+				return;
+			}			
+			System.out.print(String.format("\r\n\r\n" + 
+				"Choice Library\r\n" + 
+				"  No.    ID    Name                Address\r\n" + 
+				"------ ------- ------------------- -------------------------\r\n"));
+			User user;
+			users.first();
+			int count = 1;
+			while (users.hasNext()) {
+				user = users.getCurrent();
+				System.out.println(String.format("%6d %s", count, user.toConsoleLine()));
+				users.next();
+				count++;
+			}
+			ListChoice lc = new ListChoice(count - 1);
+			System.out.println(lc.getMenuToDisplay());
+			itemChoosen = lc.getUserOption();
+			if (0 == itemChoosen) {
+				break;
+			}
+			// Show the selected item
+			User selected = users.getIndex(itemChoosen - 1);
+			System.out.println(selected.toConsoleFull());
+			
+			Menu menu = new Menu("Select User Menu", new String[] {
+					"Return to previous menu", 
+					"List all library items on loan",
+					"Edit User", 
+					"Delete User"});
+			menuChoice = -1;
+			while (menuChoice < 0 || menuChoice > 3) {
+				System.out.print(menu.getMenuToDisplay());
+				menuChoice = menu.getUserSelection();
+				switch (menuChoice) {				
+					case 0:
+						// Return to previous menu
+						break;				
+					case 1:
+						// List all library items on loan
+						break;
+//					case 2:
+//						// TODO: Edit User
+//						editUser(selected);
+//						break;					
+//					case 3:
+//						// TODO: Delete User
+//						deleteUser(selected, users);
+//						break;	
+					default:
+						placeHolderHelper(menu.getSelectedText(menuChoice));
+						break;					
+				}
+			}
+		}
+		
+	}
+	
 }

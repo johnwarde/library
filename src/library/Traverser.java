@@ -11,5 +11,5 @@ public interface Traverser {
 	public void first();
 	public void next();
 	public boolean hasNext();
-	public LibraryItem getCurrent();
+	public Object getCurrent();
 }

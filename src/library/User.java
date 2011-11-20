@@ -7,7 +7,7 @@ package library;
  * @author johnwarde
  *
  */
-public class User {
+public class User implements OutputStrategy{
 
 	protected int libraryId;
 	protected String name;
@@ -62,6 +62,36 @@ public class User {
 	 */
 	public void setAddress(String anAddress) {
 		this.address = anAddress;
+	}
+
+	/* (non-Javadoc)
+	 * @see library.OutputStrategy#toConsoleLine()
+	 */
+	@Override
+	public String toConsoleLine() {
+		String out = String.format("%7d %-20s %-25s", 
+				getLibraryId(),
+				getName(),
+				getAddress()
+				);
+		return out;
+	}
+
+	/* (non-Javadoc)
+	 * @see library.OutputStrategy#toConsoleFull()
+	 */
+	@Override
+	public String toConsoleFull() {
+		String out = String.format(
+				"\r\n\r\n" + 
+				"Library ID:\t%d\r\n" + 
+				"Name:\t\t%s\r\n" +
+				"Address:\t%s\r\n",
+				getLibraryId(), 
+				getName(),
+				getAddress()
+				);
+		return out;	
 	}
 
 }

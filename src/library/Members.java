@@ -1,54 +1,52 @@
 /**
  * 
  */
-
-
 package library;
 
-import java.util.ArrayList; 
+import java.util.ArrayList;
 
 /**
  * @author johnwarde
  *
  */
-public class Catalog implements Traverser {
-	private ArrayList<LibraryItem> items = new ArrayList<LibraryItem>();
+public class Members implements Traverser {
+	private ArrayList<User> users = new ArrayList<User>();
 	private int currentIndex = 0;
-	
-	public Catalog() {
+
+	public Members() {
 		super();
 	}
-
-
-	public LibraryItem getIndex(int entryNo) {
-		return items.get(entryNo);
+	
+	public User getIndex(int entryNo) {
+		return users.get(entryNo);
 	}
 	
 	public int size() {
-		return items.size();
+		return users.size();
 	}	
 	
-	protected boolean add(LibraryItem toAdd) {
+	protected boolean add(User toAdd) {
 		// TODO: validate: does it already exist
-		items.add(toAdd);
+		users.add(toAdd);
 		return true;
 	}
 	
-	protected boolean remove(LibraryItem toDelete) {
-		items.remove(toDelete);	
+	protected boolean remove(User toDelete) {
+		users.remove(toDelete);	
 		return true;
 	}
 	
-	protected LibraryItem find(String aCode) {
-		for (LibraryItem item : items) {
-			if (aCode.equalsIgnoreCase(item.getCode())) {
-				return item;
+	
+	protected User find(int libraryId) {
+		for (User user : users) {
+			if (libraryId == user.getLibraryId()) {
+				return user;
 			}
 		}
 		return null;
-	}
+	}	
 	
-	// Iterator methods
+	// Iterator methods	
 
 	/* (non-Javadoc)
 	 * @see library.Traverser#first()
@@ -57,6 +55,7 @@ public class Catalog implements Traverser {
 	public void first() {
 		currentIndex = 0;
 	}
+		
 
 	/* (non-Javadoc)
 	 * @see library.Traverser#next()
@@ -71,7 +70,7 @@ public class Catalog implements Traverser {
 	 */
 	@Override
 	public boolean hasNext() {
-		if (currentIndex < items.size()) {
+		if (currentIndex < users.size()) {
 			return true;
 		}
 		return false;
@@ -81,9 +80,8 @@ public class Catalog implements Traverser {
 	 * @see library.Traverser#getCurrent()
 	 */
 	@Override
-	public LibraryItem getCurrent() {
-		return (LibraryItem) items.get(currentIndex);
+	public User getCurrent() {
+		return users.get(currentIndex);
 	}
-
 
 }

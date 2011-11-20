@@ -3,8 +3,6 @@
  */
 package library;
 
-import library.User;
-
 /**
  * @author johnwarde
  *
@@ -22,17 +20,16 @@ public class Library {
 		
 		// TODO: remove, left here for testing, make sure data is right
 		LibraryRepository lib = LibraryRepository.getInstance(); lib.toString();
+
+		User selected = lib.getUsers().getIndex(2);
+		System.out.println(selected.toConsoleFull());
 		
 		LibraryManagerConsole mgr = new LibraryManagerConsole();
 		mgr.init();
 
 		System.out.println();		
 		System.out.println("Library System shutting down ... ");
-		
-
-		
-		loadData();
-		
+				
 		/*
 		Calendar cal = Calendar.getInstance();
 		cal.set(2011, 1, 9);
@@ -53,22 +50,5 @@ public class Library {
 */
 		
 	}
-	
 
-	/**
-	 * Helper function to load some items into the library
-	 * @return
-	 */
-	static private boolean loadData() {
-		// TODO: Do I need to create and class to retain all users?
-		User[] users = {
-				new User(1, "Johnny Fenton", "Cork"),
-				new User(2, "Elvis Presley", "Graceland"),
-				new User(2, "Elvis Presley", "Graceland"),
-		};
-		System.out.println(users);
-		return true;
-	}
-	
-	
 }

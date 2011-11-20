@@ -111,6 +111,7 @@ public class Book extends LibraryItem {
 				getCode(), 
 				isOnLoan() ? "Yes" : "No",
 				getTitle(),
+				// TODO: print date published properly
 				getPubDate(),
 				getAuthor(),
 				getPublisherName(),
