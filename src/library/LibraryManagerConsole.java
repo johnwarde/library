@@ -44,7 +44,7 @@ public class LibraryManagerConsole {
 
 	private void showCatalogMenu() {		
 		Menu libMenu = new Menu("Library Catalog", new String[] {
-				"Return to main menu", 
+				"Return to previous menu", 
 				"List all items", 
 				"List by category", 
 				"List available items", 
@@ -85,14 +85,48 @@ public class LibraryManagerConsole {
 		LibraryRepository lib =  LibraryRepository.getInstance();
 		Catalog items = lib.getCatalog();		
 		Menu menu = new Menu("List by Category Menu", new String[] {
-				"Return to main menu", 
+				"Return to previous menu", 
 				"List all Books", 
 				"List all DVDs", 
 				"List all Periodicals"
 				});
+		Catalog itemsInCategory = null;
+		int choice = -1;
+		while (choice != 0) {
+			System.out.print(menu.getMenuToDisplay());
+			choice = menu.getUserSelection();
+			switch (choice) {
+				case 0:
+					// Return to previous menu
+					break;
+				case 1:
+					// TODO: fix so that can pass class type, using workaround
+//					itemsAvailableInCategory = CatalogViewer.getItemsByCategory(items, Book.class);
+					itemsInCategory = CatalogViewer.itemsByCategory(items, new Book());
+					break;
+				case 2:
+					itemsInCategory = CatalogViewer.itemsByCategory(items, new Dvd());
+					break;
+				case 3:
+					itemsInCategory = CatalogViewer.itemsByCategory(items, new Periodical());
+					break;				
+			}
+			catalogListItems(itemsInCategory);					
+		}
+	}
+
+	private void catalogListAvailableByCategory() {
+		LibraryRepository lib =  LibraryRepository.getInstance();
+		Catalog items = lib.getCatalog();		
+		Menu menu = new Menu("List Available by Category Menu", new String[] {
+				"Return to previous menu", 
+				"List all available Books", 
+				"List all available DVDs", 
+				"List all available Periodicals"
+				});
 		Catalog itemsAvailableInCategory = null;
 		int choice = -1;
-		do {
+		while (choice != 0) {
 			System.out.print(menu.getMenuToDisplay());
 			choice = menu.getUserSelection();
 			switch (choice) {
@@ -103,25 +137,21 @@ public class LibraryManagerConsole {
 					// TODO: fix so that can pass class type, using workaround
 //					itemsAvailableInCategory = CatalogViewer.getItemsByCategory(items, Book.class);
 					itemsAvailableInCategory = CatalogViewer.itemsByCategory(items, new Book());
+					itemsAvailableInCategory = CatalogViewer.itemsAvailable(itemsAvailableInCategory);
 					break;
 				case 2:
+					//itemsAvailableInCategory = CatalogViewer.itemsByCategory(items, new Dvd());
 					itemsAvailableInCategory = CatalogViewer.itemsByCategory(items, new Dvd());
+					itemsAvailableInCategory = CatalogViewer.itemsAvailable(itemsAvailableInCategory);
 					break;
-				case 3:
+				case 3:					
+					//itemsAvailableInCategory = CatalogViewer.itemsByCategory(items, new Periodical());
 					itemsAvailableInCategory = CatalogViewer.itemsByCategory(items, new Periodical());
-					break;
-				default:
-					placeHolderHelper(menu.getSelectedText(choice));
-					break;					
+					itemsAvailableInCategory = CatalogViewer.itemsAvailable(itemsAvailableInCategory);
+					break;				
 			}
-		} while (choice != 0);
-		catalogListItems(itemsAvailableInCategory);		
-	}
-
-	private void catalogListAvailableByCategory() {
-		// TODO Auto-generated method stub
-		System.out.println("To be implemented");
-		return;
+			catalogListItems(itemsAvailableInCategory);					
+		}
 	}	
 	
 	
@@ -131,13 +161,15 @@ public class LibraryManagerConsole {
 	}
 
 	private void catalogListItems(Catalog items) {
-		if (0 == items.size()) {
-			System.out.println("There are no items in the library catalog, returning you to the previous menu.");
-			return;
-		}
+
 		int itemChoosen = -1;
 		int menuChoice  = -1;
 		while (itemChoosen != 0) {
+			if (0 == items.size()) {
+				System.out.println();
+				System.out.println("There are no items to list, returning you to the previous menu.");
+				return;
+			}			
 			System.out.print(String.format("\r\n\r\n" + 
 				"Choice Library  On                                        Author/\r\n" + 
 				"  No.   Code   Loan Type       Title                      Artist\r\n" + 
@@ -197,7 +229,7 @@ public class LibraryManagerConsole {
 //						// TODO: maybe just need to go back to list of items
 //						break;					
 					case 3:
-						deleteLibraryItem(selected);
+						deleteLibraryItem(selected, items);
 						// TODO: maybe just need to go back to list of items
 						break;	
 					default:
@@ -208,18 +240,21 @@ public class LibraryManagerConsole {
 		}
 	}
 
-	private void deleteLibraryItem(LibraryItem selected) {
+	private void deleteLibraryItem(LibraryItem selected, Catalog subset) {
 		Confirmation ui = new Confirmation("Are you sure you want to delete this library item? (y/n)");
 		if (ui.getUserChoice()) {
+			subset.remove(selected);
 			LibraryRepository lib =  LibraryRepository.getInstance();
 			Catalog items = lib.getCatalog();
-			items.remove(selected);
+			if (subset != items) {
+				items.remove(selected);				
+			}
 		}
 	}
 
 	private void showUsersMenu() {
 		Menu usersMenu = new Menu("Library Users", 
-				new String[] {"Return to main menu", 
+				new String[] {"Return to previous menu", 
 							  "List all users", 
 							  "List users with loans", 
 							  "Add user"});

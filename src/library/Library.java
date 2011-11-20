@@ -60,35 +60,13 @@ public class Library {
 	 * @return
 	 */
 	static private boolean loadData() {
-/*
-		Object[][] csv = {
-				// Type,     code,     onLoan, pubDate,      title,        author,      publisherName, edition, 
-				 {"Book", "SKU001", false, "01/01/2011", "First Book", "John Warde", "O'Reilly", 1},
-				 {"Book", "SKU002", false, "01/01/2011", "Second Book", "Brian Warde", "O'Reilly", 2},
-				 
-				// Type,     code,     onLoan, pubDate,      title,     artist, genre
-				 {"Dvd",  "SKU003", false, "12/11/2001", "Monster", "REM",   "O'Reilly"},
-				 {"Dvd",  "SKU004", false, "12/11/2001", "U2", "One Tree Hill",   "Guinness"},
-				 
-				// Type,            code,     onLoan, pubDate,     title,       author,  periodicalName
-				 {"Periodical",  "SKU005", false, "12/04/1996", "Quick one", "Steorn",   "Steorn Monthly"}
-		};
-		LibraryItem item;
-		for (Object[] record : csv) {
-			item = LibraryItemFactory.makeLibraryItem(record);
-			lib.add(item);
-		}
-*/
-		
 		// TODO: Do I need to create and class to retain all users?
-		
 		User[] users = {
 				new User(1, "Johnny Fenton", "Cork"),
 				new User(2, "Elvis Presley", "Graceland"),
 				new User(2, "Elvis Presley", "Graceland"),
 		};
 		System.out.println(users);
-
 		return true;
 	}
 	

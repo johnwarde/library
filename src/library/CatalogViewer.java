@@ -25,13 +25,13 @@ public abstract class CatalogViewer {
 		return newItems;
 	}
 	
-	static Catalog itemsOnLoan(Catalog items) {
+	static Catalog itemsAvailable(Catalog items) {
 		Catalog newItems = new Catalog();
 		items.first();
 		LibraryItem item;
 		while (items.hasNext()) {
 			item = items.getCurrent();
-			if (item.isOnLoan()) {
+			if (!item.isOnLoan()) {
 				newItems.add(item);
 			}
 			items.next();
