@@ -221,8 +221,9 @@ public class LibraryManagerConsole {
 					case 1:
 						if (selected.isOnLoan()) {
 							// TODO: Check-in
+							itemCheckIn(selected);
 						} else {
-							// TODO: Check-out
+							itemCheckOut(selected);
 						}
 						break;
 					case 2:
@@ -239,6 +240,68 @@ public class LibraryManagerConsole {
 			}
 		}
 	}
+
+
+	/**
+	 * Checks out an item to a specific user
+	 * @param selected
+	 */
+	private void itemCheckOut(LibraryItem selected) {
+		LibraryRepository lib =  LibraryRepository.getInstance();
+		Members users = lib.getUsers();		
+		User loanUser;
+		Prompt promptForUser = new Prompt("Enter name or user id");		
+		String user;
+		boolean isValidInt = true;
+		int validInt = -1;
+		while (true) {
+			user = promptForUser.getUserChoice();
+			isValidInt = true;
+			validInt = -1;
+			try {
+				validInt = Integer.parseInt((String) user);
+			} catch (Exception e) {
+				isValidInt = false;
+			}
+			if (0 == user.length()) {
+				// user abort
+				return;
+			}
+			if (isValidInt) {
+				loanUser = users.find(validInt);
+			} else {
+				loanUser = users.find(user);				
+			}
+			if (null == loanUser) {
+				System.out.print(String.format("\r\nCannot find user for '%s', " +
+						"please try again or \r\n" +
+						"press return to previous menu.\r\n", user));
+			} else {
+				// Found a valid user
+				System.out.println(loanUser.toConsoleFull());
+				Confirmation confirmCheckout = new Confirmation("Check-out item to above user?");
+				if (confirmCheckout.getUserChoice()) {
+					Loans loans = lib.getLoans();
+					loans.add(selected.getCode(), loanUser.getLibraryId());
+					break;
+				}
+			}
+		}
+	}
+	
+	private void itemCheckIn(LibraryItem selected) {
+		LibraryRepository lib =  LibraryRepository.getInstance();
+		Loans loans = lib.getLoans();
+		Members users = lib.getUsers();		
+		User loanUser;
+		String libCode = selected.getCode();
+		int userId = loans.getUserIdForLoanItem(libCode);
+		loanUser = users.find(userId);
+		Confirmation confirmCheckout = new Confirmation(String.format("Is %s returning this item?", loanUser.getName()));
+		if (confirmCheckout.getUserChoice()) {
+			loans.removeItem(libCode);
+		}		
+	}	
 
 	private void editLibraryItem(LibraryItem selected) {
 		if (selected.onLoan) {

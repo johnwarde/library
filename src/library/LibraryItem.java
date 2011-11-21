@@ -77,13 +77,16 @@ abstract public class LibraryItem implements OutputStrategy{
 
 
 	public boolean isOnLoan() {
-		return onLoan;
+		LibraryRepository lib = LibraryRepository.getInstance();
+		Loans loans = lib.getLoans();
+		return loans.isItemOnLoan(getCode());
+//		return onLoan;
 	}
 
 
-	public void setOnLoan(boolean onLoanVal) {
-		this.onLoan = onLoanVal;
-	}
+//	public void setOnLoan(boolean onLoanVal) {
+//		this.onLoan = onLoanVal;
+//	}
 
 	abstract public void editWithForm(Form libItemForm);
 

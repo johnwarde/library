@@ -10,7 +10,9 @@ import library.LibraryItem;
  *
  */
 public abstract class CatalogViewer {
+//	static Catalog itemsByCategory(Catalog items, Class<? extends LibraryItem> category) {
 //	static Catalog itemsByCategory(Catalog items, Class<LibraryItem> category) {
+//	static Catalog itemsByCategory(Catalog items, Class category) {
 	static Catalog itemsByCategory(Catalog items, LibraryItem category) {
 		Catalog newItems = new Catalog();
 		items.first();

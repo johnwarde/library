@@ -7,6 +7,7 @@ public class LibraryRepository {
     private Catalog lib;
     private Members users;
     private int lastLibraryId = 0;
+	private Loans loans;
  
     public static LibraryRepository getInstance() {
             return instance;
@@ -16,6 +17,7 @@ public class LibraryRepository {
     private LibraryRepository() { 
     	lib = new Catalog();
     	users = new Members();
+    	loans = new Loans();
     	loadData();
     }
     
@@ -27,6 +29,9 @@ public class LibraryRepository {
     	return users;
     }
     
+	public Loans getLoans() {
+		return loans;
+	}    
 	/**
 	 * This new ID needs to be used straight away
 	 * @return the lastLibraryId
@@ -69,5 +74,7 @@ public class LibraryRepository {
 			users.add(userNew);
 		}		
 	}
+
+
 }
 

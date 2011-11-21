@@ -46,6 +46,15 @@ public class Members implements Traverser {
 		return null;
 	}	
 	
+	public User find(String name) {
+		for (User user : users) {
+			if (name.equals(user.getName())) {
+				return user;
+			}
+		}
+		return null;
+	}	
+	
 	// Iterator methods	
 
 	/* (non-Javadoc)
@@ -83,5 +92,6 @@ public class Members implements Traverser {
 	public User getCurrent() {
 		return users.get(currentIndex);
 	}
+
 
 }
