@@ -12,6 +12,7 @@ public class User implements OutputStrategy{
 	protected int libraryId;
 	protected String name;
 	protected String address;
+	protected String[] itemsOnLoan;
 	// TO DO: object for storing LibraryItems
 	// private obj? onLoan
 

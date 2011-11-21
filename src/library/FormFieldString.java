@@ -6,7 +6,6 @@ public class FormFieldString extends FormField {
 	public FormFieldString(String userInterfaceId, String prompt, String defaultValue) {
 		super(userInterfaceId, prompt);
 		value = defaultValue;
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -27,7 +26,7 @@ public class FormFieldString extends FormField {
 	 * @see library.FormField#isValidValue(java.lang.Object)
 	 */
 	@Override
-	public Object validateValue(Object input) {
+	public Object validateValue(String input) {
 		// String are always valid unless we start to 
 		// put a limit on the length of fields
 		return input;

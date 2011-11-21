@@ -4,22 +4,25 @@
 package library;
 
 import java.io.Console;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * @author johnwarde
  *
  */
 public class Form {
+	private boolean isNewData;
 	private ArrayList<FormField> fieldDefs = new ArrayList<FormField>();
-//	private int fieldId = 0;
 	private String title;
-//	private Object[][] formDef;
 	
 	
-	public Form(String formTitle) {
-		title = formTitle;
-		//formDef = formDefinition;
+	
+	public Form(String formTitle, boolean isNewData ) {
+		this.title = formTitle;
+		this.isNewData = isNewData;
 	}
 
 	public void addField(String userInterfaceId, String prompt, String defaultValue) {
@@ -31,6 +34,10 @@ public class Form {
 		fieldDefs.add(new FormFieldInt(userInterfaceId, prompt, defaultValue));
 		
 	}
+	
+	public void addField(String userInterfaceId, String prompt, Date defaultValue) {
+		fieldDefs.add(new FormFieldDate(userInterfaceId, prompt, defaultValue));
+	}	
 
 	public Object getFieldValue(String userInterfaceId) {
 		for (FormField fieldDef : fieldDefs) {
@@ -51,17 +58,29 @@ public class Form {
         		getUnderline(title.length())
         		);
         System.out.println(header);
+	    DateFormat df = new SimpleDateFormat(LibraryRepository.DATE_FORMAT);
+	    Object defaultValue;
+        String prompt;
 		boolean isValidValue = false;
 		for (FormField fieldDef : fieldDefs) {
 			System.out.println();
 	        String input = "";
-	        
+	        defaultValue = fieldDef.getValue();
+	        if (defaultValue instanceof Date) {
+	        	defaultValue = df.format(fieldDef.getValue());
+			}
 	        while (!isValidValue) {
 	        	try {
-	        		System.out.println(String.format("%s : [%s]", fieldDef.getLabel(), fieldDef.getValue()));
-	            	input = console.readLine("Enter value: ");
+	        		if (isNewData) {
+	        			prompt = String.format("%s : ", fieldDef.getLabel());
+					} else {
+//		        		System.out.println(String.format("%s : [%s]", fieldDef.getLabel(), fieldDef.getValue()));
+		        		System.out.println(String.format("%s : [%s]", fieldDef.getLabel(), defaultValue));
+						prompt = "Enter value : ";
+					}
+	            	input = console.readLine(prompt);
 	            	input = input.trim();
-	        		System.out.println(String.format("input = [%s] (length = %d)", input, input.length()));	            	
+	        		//System.out.println(String.format("input = [%s] (length = %d)", input, input.length()));	            	
 	            	if (0 == input.length()) {
 						break;
 					}

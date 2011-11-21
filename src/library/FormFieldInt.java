@@ -26,7 +26,7 @@ public class FormFieldInt extends FormField {
 	 * @see library.FormField#isValidValue(java.lang.Object)
 	 */
 	@Override
-	public Object validateValue(Object input) {
+	public Object validateValue(String input) {
 		boolean isValidValue = true;
 		int newValue = 0;
 		try {

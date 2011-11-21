@@ -27,11 +27,11 @@ public class Library {
 		System.out.println();		
 		System.out.println("Library System shutting down ... ");
 				
-		/*
-		Calendar cal = Calendar.getInstance();
-		cal.set(2011, 1, 9);
-		Catalog lib = new Catalog();
-		lib.add(new Book("a", "test", cal.getTime(), false, "jb", "aranbay", 1));
+
+//		Calendar cal = Calendar.getInstance();
+//		cal.set(2011, 1, 9);
+//		Catalog lib = new Catalog();
+//		lib.add(new Book("a", "test", cal.getTime(), false, "jb", "aranbay", 1));
 		
 /*		
 		Book aBook = new Book();

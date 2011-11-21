@@ -3,6 +3,8 @@
  */
 package library;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -93,6 +95,7 @@ public class Dvd extends LibraryItem {
 	 */
 	@Override
 	public String toConsoleFull() {
+	    DateFormat df = new SimpleDateFormat(LibraryRepository.DATE_FORMAT);
 		String out = String.format(
 				"\r\n\r\n" + 
 				"Item:\t\t\t%s\r\n" + 
@@ -106,11 +109,25 @@ public class Dvd extends LibraryItem {
 				getCode(), 
 				isOnLoan() ? "Yes" : "No",
 				getTitle(),
-				getPubDate(),
+				df.format(getPubDate()),
 				getArtist(),
 				getGenre()
 				);
 		return out;	
 	}
+	
+	public void editWithForm(Form libItemForm) {
+		super.editWithFormPre(libItemForm);
+		libItemForm.addField("artist", "Artist", getArtist());
+		libItemForm.addField("genre", "Genre", getGenre());
+		
+		libItemForm.userFill();
+		
+		super.editWithFormPost(libItemForm);
+		String newArtist = (String) libItemForm.getFieldValue("artist");	
+		String newGenre = (String) libItemForm.getFieldValue("genre");	
+		setArtist(newArtist);
+		setGenre(newGenre);
+	}	
 	
 }

@@ -1,5 +1,7 @@
 package library;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Periodical extends LibraryItem {
@@ -86,6 +88,7 @@ public class Periodical extends LibraryItem {
 	 */
 	@Override
 	public String toConsoleFull() {
+	    DateFormat df = new SimpleDateFormat(LibraryRepository.DATE_FORMAT);
 		String out = String.format(
 				"\r\n\r\n" + 
 				"Item:\t\t\t%s\r\n" + 
@@ -99,16 +102,39 @@ public class Periodical extends LibraryItem {
 				getCode(), 
 				isOnLoan() ? "Yes" : "No",
 				getTitle(),
-				getPubDate(),
+				df.format(getPubDate()),
 				getAuthor(),
 				getPeriodicalName()
 				);
 		return out;
 	}
 
+	
+	/* (non-Javadoc)
+	 * @see library.LibraryItem#editWithForm(library.Form)
+	 */
+	@Override
+	public void editWithForm(Form libItemForm) {
+		super.editWithFormPre(libItemForm);
+		libItemForm.addField("author", "Author", getAuthor());
+		libItemForm.addField("periodicalName", "Publisher", getPeriodicalName());
+		
+		libItemForm.userFill();
+		
+		super.editWithFormPost(libItemForm);
+		String newAuthor = (String) libItemForm.getFieldValue("author");	
+		String newPeriodicalName = (String) libItemForm.getFieldValue("periodicalName");	
+		setAuthor(newAuthor);
+		setPeriodicalName(newPeriodicalName);		
+	}
+	
+	
 /*
 	public static String getTypeToDisplay() {
 		return "Periodical";
 	}
 */
+	
+	
+	
 }

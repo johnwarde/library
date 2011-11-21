@@ -65,7 +65,11 @@ public class LibraryManagerConsole {
 				case 3:
 					// List available items by category
 					catalogListAvailableByCategory();
-					break;					
+					break;		
+				case 4:
+					// List available items by category
+					newLibraryItem();
+					break;						
 				case 0:
 					// Return to main menu
 					break;
@@ -237,19 +241,51 @@ public class LibraryManagerConsole {
 	}
 
 	private void editLibraryItem(LibraryItem selected) {
-		
-//		Confirmation ui = new Confirmation("Are you sure you want to delete this library item? (y/n)");
-//		if (ui.getUserChoice()) {
-//			subset.remove(selected);
-//			LibraryRepository lib =  LibraryRepository.getInstance();
-//			Catalog items = lib.getCatalog();
-//			if (subset != items) {
-//				items.remove(selected);				
-//			}
-//		}
-		
+		if (selected.onLoan) {
+			System.out.println();			
+			System.out.println("You cannot edit an item that is out on loan, ");
+			System.out.println("returning you to the previous menu");
+			System.out.println();			
+			return;
+		}
+		Form libItemForm = new Form("Edit Library Item", false);
+		selected.editWithForm(libItemForm);
 	}
 
+	private void newLibraryItem() {
+		LibraryRepository lib =  LibraryRepository.getInstance();
+		Catalog items = lib.getCatalog();		
+		Menu menu = new Menu("New Library Item Menu", new String[] {
+				"Return to previous menu", 
+				"New Book", 
+				"New DVD", 
+				"New Periodical"
+				});
+		Form libItemForm = new Form("New Library Item", true);
+		LibraryItem newItem = null;
+		int choice = -1;
+		while (choice != 0) {
+			System.out.print(menu.getMenuToDisplay());
+			choice = menu.getUserSelection();
+			switch (choice) {
+				case 0:
+					// Return to previous menu
+					return;
+				case 1:
+					newItem = new Book();
+					break;
+				case 2:
+					newItem = new Dvd();					
+					break;
+				case 3:
+					newItem = new Periodical();
+					break;				
+			}
+			newItem.editWithForm(libItemForm);
+			items.add(newItem);		
+		}		
+	}	
+	
 	private void deleteLibraryItem(LibraryItem selected, Catalog subset) {
 		Confirmation ui = new Confirmation("Are you sure you want to delete this library item? (y/n)");
 		if (ui.getUserChoice()) {
@@ -364,7 +400,7 @@ public class LibraryManagerConsole {
 
 
 	private void userAdd() {
-		Form userDetailsForm = new Form("New User");
+		Form userDetailsForm = new Form("New User", true);
 		//                        UI id, prompt, default value 
 		userDetailsForm.addField("name", "Name", "");
 		userDetailsForm.addField("addr", "Address", "");
@@ -381,7 +417,7 @@ public class LibraryManagerConsole {
 	
 
 	private void editUser(User selected) {
-		Form userDetailsForm = new Form("Edit User");
+		Form userDetailsForm = new Form("Edit User", false);
 		//                        UI id, prompt, default value 
 		userDetailsForm.addField("name", "Name", selected.getName());
 		userDetailsForm.addField("addr", "Address", selected.getAddress());

@@ -1,5 +1,7 @@
 package library;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Book extends LibraryItem {
@@ -97,6 +99,7 @@ public class Book extends LibraryItem {
 	 */
 	@Override
 	public String toConsoleFull() {
+	    DateFormat df = new SimpleDateFormat(LibraryRepository.DATE_FORMAT);
 		String out = String.format(
 				"\r\n\r\n" + 
 				"Item:\t\t\t%s\r\n" + 
@@ -111,8 +114,7 @@ public class Book extends LibraryItem {
 				getCode(), 
 				isOnLoan() ? "Yes" : "No",
 				getTitle(),
-				// TODO: print date published properly
-				getPubDate(),
+				df.format(getPubDate()),
 				getAuthor(),
 				getPublisherName(),
 				getEdition()
@@ -128,6 +130,34 @@ public class Book extends LibraryItem {
 		return "Book [author=" + author + ", publisherName=" + publisherName
 				+ ", edition=" + edition + ", code=" + code + ", title="
 				+ title + ", pubDate=" + pubDate + ", onLoan=" + onLoan + "]";
+	}
+
+	/* (non-Javadoc)
+	 * @see library.LibraryItem#editWithForm(library.Form)
+	 */
+	@Override
+	public void editWithForm(Form libItemForm) {
+		// TODO Auto-generated method stub
+//		libItemForm.addField("title", "Book Title", getTitle());
+//		libItemForm.addField("pubdate", "Publish Date", getPubDate());
+		super.editWithFormPre(libItemForm);
+		libItemForm.addField("author", "Author", getAuthor());
+		libItemForm.addField("edition", "Book Edition", getEdition());
+		libItemForm.addField("publisherName", "Publisher", getPublisherName());
+		
+		libItemForm.userFill();
+		
+		super.editWithFormPost(libItemForm);
+//		String newTitle = (String) libItemForm.getFieldValue("title");
+//		Date newPubDate = (Date) libItemForm.getFieldValue("pubdate");	
+		String newAuthor = (String) libItemForm.getFieldValue("author");	
+		int newEditionNo = (int) libItemForm.getFieldValue("edition");	
+		String newPublisher = (String) libItemForm.getFieldValue("publisherName");	
+//		setTitle(newTitle);
+//		setPubDate(newPubDate);
+		setAuthor(newAuthor);
+		setEdition(newEditionNo);
+		setPublisherName(newPublisher);		
 	}
 
 /*

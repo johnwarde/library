@@ -44,6 +44,6 @@ abstract public class FormField {
 	/**
 	 * @return
 	 */
-	abstract public Object validateValue(Object input);
+	abstract public Object validateValue(String input);
 	
 }

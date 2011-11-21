@@ -1,6 +1,8 @@
 package library;
 
+
 public class LibraryRepository {
+    public static final String DATE_FORMAT = "dd-MM-yyyy";
     private static final LibraryRepository instance = new LibraryRepository();
     private Catalog lib;
     private Members users;
@@ -60,13 +62,11 @@ public class LibraryRepository {
 		String name;
 		String address;
 		User userNew;
-//		int libraryId = 0;
 		for (String[] record : csv_users) {
 			name = record[0];
 			address = record[1];
 			userNew = new User(getNewLibraryId(), name, address);
 			users.add(userNew);
-//			libraryId++;
 		}		
 	}
 }

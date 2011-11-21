@@ -85,4 +85,22 @@ abstract public class LibraryItem implements OutputStrategy{
 		this.onLoan = onLoanVal;
 	}
 
+	abstract public void editWithForm(Form libItemForm);
+
+	
+	public void editWithFormPre(Form libItemForm) {
+		libItemForm.addField("code", "Library Code", getCode());
+		libItemForm.addField("title", "Book Title", getTitle());
+		libItemForm.addField("pubdate", "Publish Date", getPubDate());		
+	}
+	
+	public void editWithFormPost(Form libItemForm) {
+		String newCode = (String) libItemForm.getFieldValue("code");
+		String newTitle = (String) libItemForm.getFieldValue("title");
+		Date newPubDate = (Date) libItemForm.getFieldValue("pubdate");
+		setCode(newCode);
+		setTitle(newTitle);
+		setPubDate(newPubDate);		
+	}
+
 }
