@@ -227,7 +227,6 @@ public class LibraryManagerConsole {
 							itemCheckOut(selected);
 						}
 						if (catalogNeedRefresh) {
-							System.out.println("Issuing a refresh");
 							return true;
 						}
 						break;
