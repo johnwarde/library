@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="javadoc">
+    <target name="javadoc">
+        <javadoc access="public" author="true" classpath="C:\apps\eclipse\plugins\org.junit_4.8.2.v4_8_2_v20110321-1705\junit.jar;C:\apps\eclipse\plugins\org.hamcrest.core_1.1.0.v20090501071000.jar" destdir="javadoc" doctitle="Library System" nodeprecated="false" nodeprecatedlist="false" noindex="false" nonavbar="false" notree="false" source="1.6" sourcefiles="src/library/ConsoleComponent.java,src/library/Loans.java,src/library/Confirmation.java,src/library/FormField.java,src/library/Traverser.java,src/library/FormFieldDate.java,src/library/ListContextMenu.java,src/library/Dvd.java,src/library/Library.java,src/library/Form.java,src/library/Menu.java,src/library/LibraryRepository.java,src/library/Members.java,src/library/User.java,src/library/Book.java,src/library/Prompt.java,src/library/LibraryManagerConsole.java,src/library/ListChoice.java,src/library/LibraryItem.java,src/library/FormFieldInt.java,src/library/FormFieldString.java,src/library/LibraryItemFactory.java,src/library/Catalog.java,src/library/OutputStrategy.java,src/library/CatalogViewer.java,src/library/Periodical.java" sourcepath="src;junit-tests" splitindex="true" use="true" version="true"/>
+    </target>
+</project>
