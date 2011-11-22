@@ -13,6 +13,11 @@ public abstract class CatalogViewer {
 //	static Catalog itemsByCategory(Catalog items, Class<? extends LibraryItem> category) {
 //	static Catalog itemsByCategory(Catalog items, Class<LibraryItem> category) {
 //	static Catalog itemsByCategory(Catalog items, Class category) {
+	/**
+	 * @param items
+	 * @param category
+	 * @return
+	 */
 	static Catalog itemsByCategory(Catalog items, LibraryItem category) {
 		Catalog newItems = new Catalog();
 		items.first();
@@ -28,6 +33,10 @@ public abstract class CatalogViewer {
 		return newItems;
 	}
 	
+	/**
+	 * @param items
+	 * @return
+	 */
 	static Catalog itemsAvailable(Catalog items) {
 		Catalog newItems = new Catalog();
 		items.first();
@@ -42,6 +51,11 @@ public abstract class CatalogViewer {
 		return newItems;
 	}
 
+	/**
+	 * @param items
+	 * @param loanItemIds
+	 * @return
+	 */
 	public static Catalog itemsByList(Catalog items, String[] loanItemIds) {
 		Catalog newItems = new Catalog();
 		items.first();

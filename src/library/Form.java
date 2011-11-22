@@ -74,14 +74,15 @@ public class Form extends ConsoleComponent {
 	        		if (isNewData) {
 	        			prompt = String.format("%s : ", fieldDef.getLabel());
 					} else {
-//		        		System.out.println(String.format("%s : [%s]", fieldDef.getLabel(), fieldDef.getValue()));
 		        		System.out.println(String.format("%s : [%s]", fieldDef.getLabel(), defaultValue));
 						prompt = "Enter value : ";
 					}
 	            	input = console.readLine(prompt);
 	            	input = input.trim();
-	        		//System.out.println(String.format("input = [%s] (length = %d)", input, input.length()));	            	
 	            	if (0 == input.length()) {
+	            		if (isNewData) {
+							throw new Exception("Must enter a value");
+						}
 						break;
 					}
 	            	Object newValue = fieldDef.validateValue(input);

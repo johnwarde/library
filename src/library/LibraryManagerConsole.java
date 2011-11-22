@@ -18,6 +18,9 @@ public class LibraryManagerConsole {
 	public LibraryManagerConsole() {
 	}
 	
+	/**
+	 * The Main entry point for the library system
+	 */
 	public void init() {
 		// Main loop
 		Menu mainMenu = new Menu("Main Menu", 
@@ -349,7 +352,12 @@ public class LibraryManagerConsole {
 					break;				
 			}
 			newItem.editWithForm(libItemForm);
-			items.add(newItem);		
+			if (!items.add(newItem)) {
+				System.out.println();			
+				System.out.println("Existing Library Code found, item not added,");
+				System.out.println("returning you to the previous menu");
+				System.out.println();	
+			}
 		}		
 	}	
 	

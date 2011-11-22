@@ -20,26 +20,48 @@ public class Catalog implements Traverser {
 	}
 
 
+	/**
+	 * @param entryNo
+	 * @return
+	 */
 	public LibraryItem getIndex(int entryNo) {
 		return items.get(entryNo);
 	}
 	
+	/**
+	 * @return
+	 */
 	public int size() {
 		return items.size();
 	}	
 	
-	protected boolean add(LibraryItem toAdd) {
-		// TODO: validate: does it already exist
+	/**
+	 * @param toAdd
+	 * @return
+	 */
+	public boolean add(LibraryItem toAdd) {
+		if (null != find(toAdd.getCode())) {
+			// We found an existing library code, error
+			return false;
+		}
 		items.add(toAdd);
 		return true;
 	}
 	
-	protected boolean remove(LibraryItem toDelete) {
+	/**
+	 * @param toDelete
+	 * @return
+	 */
+	public boolean remove(LibraryItem toDelete) {
 		items.remove(toDelete);	
 		return true;
 	}
 	
-	protected LibraryItem find(String aCode) {
+	/**
+	 * @param aCode
+	 * @return
+	 */
+	public LibraryItem find(String aCode) {
 		for (LibraryItem item : items) {
 			if (aCode.equalsIgnoreCase(item.getCode())) {
 				return item;

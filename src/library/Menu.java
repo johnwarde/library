@@ -33,12 +33,12 @@ public class Menu extends ConsoleComponent {
 	
 	public String getMenuToDisplay() {
 		// TODO: clear screen - not working
-		try {
-			Runtime rt = Runtime.getRuntime();
-	        rt.exec("cls");			
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
+//		try {
+//			Runtime rt = Runtime.getRuntime();
+//	        rt.exec("cls");			
+//		} catch (Exception e) {
+//          // Handle Exception
+//		}
 		String header = String.format("\r\n\r\n\t%s\r\n\t%s\r\n\r\n", menuTitle, this.getUnderline(menuTitle.length()));
 		String menuDetail = "";
 		int menuOptionCount = 0;

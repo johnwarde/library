@@ -15,6 +15,11 @@ public class Loans {
 	private HashMap<String, Integer> entries = new HashMap<String, Integer>();
 	
 	
+	/**
+	 * @param libCode
+	 * @param userId
+	 * @return
+	 */
 	public boolean add(String libCode, int userId) {
 		if (entries.containsKey(libCode)) {
 			return false;
@@ -23,10 +28,18 @@ public class Loans {
 		return true;
 	}
 	
+	/**
+	 * @param libCode
+	 * @return
+	 */
 	public boolean isItemOnLoan(String libCode) {
 		return entries.containsKey(libCode);
 	}
 	
+	/**
+	 * @param libCode
+	 * @return
+	 */
 	public boolean removeItem(String libCode) {
 		if (entries.containsKey(libCode)) {
 			entries.remove(libCode);
@@ -35,6 +48,10 @@ public class Loans {
 		return false;
 	}
 	
+	/**
+	 * @param userId
+	 * @return
+	 */
 	public String[] getLoanItemsForUser(int userId) {
         Iterator<String> iterator = entries.keySet().iterator();
         ArrayList<String> results = new ArrayList<String>();
@@ -50,6 +67,10 @@ public class Loans {
         return results.toArray(new String[results.size()]) ;
 	}
 
+	/**
+	 * @param libCode
+	 * @return
+	 */
 	public int getUserIdForLoanItem(String libCode) {
 		return entries.get(libCode);
 	}

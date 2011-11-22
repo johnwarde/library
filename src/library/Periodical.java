@@ -8,11 +8,10 @@ public class Periodical extends LibraryItem {
 
 	protected String 		author;
 	protected String 		periodicalName;	
-// TODO: create PagesRage class?
-//	protected PagesRange 	pagesRange;	
+// TODO: PagesRage
 	
 	public Periodical() {
-		// TODO Auto-generated constructor stub
+
 	}
 
 	
@@ -26,9 +25,8 @@ public class Periodical extends LibraryItem {
 	 * @param author
 	 * @param periodicalName
 	 */
-	public Periodical(String code, String title, Date pubDate, boolean onLoan,
-			String author, String periodicalName) {
-		super(code, title, pubDate, onLoan);
+	public Periodical(String code, String title, Date pubDate, String author, String periodicalName) {
+		super(code, title, pubDate);
 		this.author = author;
 		this.periodicalName = periodicalName;
 	}
@@ -127,14 +125,5 @@ public class Periodical extends LibraryItem {
 		setAuthor(newAuthor);
 		setPeriodicalName(newPeriodicalName);		
 	}
-	
-	
-/*
-	public static String getTypeToDisplay() {
-		return "Periodical";
-	}
-*/
-	
-	
-	
+		
 }

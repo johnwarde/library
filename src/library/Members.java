@@ -17,26 +17,44 @@ public class Members implements Traverser {
 		super();
 	}
 	
+	/**
+	 * @param entryNo
+	 * @return
+	 */
 	public User getIndex(int entryNo) {
 		return users.get(entryNo);
 	}
 	
+	/**
+	 * @return
+	 */
 	public int size() {
 		return users.size();
 	}	
 	
+	/**
+	 * @param toAdd
+	 * @return
+	 */
 	protected boolean add(User toAdd) {
-		// TODO: validate: does it already exist
 		users.add(toAdd);
 		return true;
 	}
 	
+	/**
+	 * @param toDelete
+	 * @return
+	 */
 	protected boolean remove(User toDelete) {
 		users.remove(toDelete);	
 		return true;
 	}
 	
 	
+	/**
+	 * @param libraryId
+	 * @return
+	 */
 	protected User find(int libraryId) {
 		for (User user : users) {
 			if (libraryId == user.getLibraryId()) {
@@ -46,6 +64,10 @@ public class Members implements Traverser {
 		return null;
 	}	
 	
+	/**
+	 * @param name
+	 * @return
+	 */
 	public User find(String name) {
 		for (User user : users) {
 			if (name.equals(user.getName())) {

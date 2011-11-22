@@ -20,29 +20,22 @@ public class Dvd extends LibraryItem {
 	 * 
 	 */
 	public Dvd() {
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
 	 * @param code
 	 * @param title
 	 * @param pubDate
-	 * @param onLoan
 	 * @param artist
 	 * @param genre
 	 */
-	public Dvd(String code, String title, Date pubDate, boolean onLoan,
-			String artist, String genre) {
-		super(code, title, pubDate, onLoan);
+	public Dvd(String code, String title, Date pubDate, String artist, String genre) {
+		super(code, title, pubDate);
 		this.artist = artist;
 		this.genre = genre;
 	}
 
-/*
-	public static String getTypeForDisplay() {
-		return "DVD";
-	}
-*/
+	
 	/**
 	 * @return the artist
 	 */
@@ -116,6 +109,9 @@ public class Dvd extends LibraryItem {
 		return out;	
 	}
 	
+	/* (non-Javadoc)
+	 * @see library.LibraryItem#editWithForm(library.Form)
+	 */
 	public void editWithForm(Form libItemForm) {
 		super.editWithFormPre(libItemForm);
 		libItemForm.addField("artist", "Artist", getArtist());

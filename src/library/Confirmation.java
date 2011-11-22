@@ -12,10 +12,16 @@ import java.io.Console;
 public class Confirmation extends ConsoleComponent {
 	String askMessage;
 	
+	/**
+	 * @param confirmMessage
+	 */
 	public Confirmation(String confirmMessage) {
 		askMessage = confirmMessage;
 	}
 	
+	/**
+	 * @return
+	 */
 	public boolean getUserChoice() {
 		System.out.println();
         Console console = System.console();

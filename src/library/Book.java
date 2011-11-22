@@ -5,28 +5,24 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Book extends LibraryItem {
-
 	protected String 	author;
 	protected String 	publisherName;
 	protected int  		edition;
 	
 	public Book() {
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
 	 * @param code
 	 * @param title
 	 * @param pubDate
-	 * @param onLoan
 	 * @param author
 	 * @param publisherName
 	 * @param edition
 	 */
-	public Book(String code, String title, Date pubDate, boolean onLoan, String author, String publisherName, int edition) {
-//	public Book(String code, String title, Date pubDate, String author, String publisherName, int edition) {
+	public Book(String code, String title, Date pubDate, String author, String publisherName, int edition) {
 		
-		super(code, title, pubDate, false);
+		super(code, title, pubDate);
 		this.author = author;
 		this.publisherName = publisherName;
 		this.edition = edition;
@@ -129,7 +125,7 @@ public class Book extends LibraryItem {
 	public String toString() {
 		return "Book [author=" + author + ", publisherName=" + publisherName
 				+ ", edition=" + edition + ", code=" + code + ", title="
-				+ title + ", pubDate=" + pubDate + ", onLoan=" + onLoan + "]";
+				+ title + ", pubDate=" + pubDate + ", onLoan=" + "]";
 	}
 
 	/* (non-Javadoc)
@@ -137,9 +133,6 @@ public class Book extends LibraryItem {
 	 */
 	@Override
 	public void editWithForm(Form libItemForm) {
-		// TODO Auto-generated method stub
-//		libItemForm.addField("title", "Book Title", getTitle());
-//		libItemForm.addField("pubdate", "Publish Date", getPubDate());
 		super.editWithFormPre(libItemForm);
 		libItemForm.addField("author", "Author", getAuthor());
 		libItemForm.addField("edition", "Book Edition", getEdition());
@@ -148,21 +141,12 @@ public class Book extends LibraryItem {
 		libItemForm.userFill();
 		
 		super.editWithFormPost(libItemForm);
-//		String newTitle = (String) libItemForm.getFieldValue("title");
-//		Date newPubDate = (Date) libItemForm.getFieldValue("pubdate");	
 		String newAuthor = (String) libItemForm.getFieldValue("author");	
 		int newEditionNo = (int) libItemForm.getFieldValue("edition");	
 		String newPublisher = (String) libItemForm.getFieldValue("publisherName");	
-//		setTitle(newTitle);
-//		setPubDate(newPubDate);
 		setAuthor(newAuthor);
 		setEdition(newEditionNo);
 		setPublisherName(newPublisher);		
 	}
 
-/*
-	public static String getTypeToDisplay() {
-		return "Book";
-	}
-*/
 }

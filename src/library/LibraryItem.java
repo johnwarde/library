@@ -10,17 +10,14 @@ import java.util.Date;
  *
  */
 abstract public class LibraryItem implements OutputStrategy{
-
 	protected String 	code;
 	protected String 	title;
 	protected Date 		pubDate;
-	protected boolean 	onLoan;
 	
 	/**
 	 * 
 	 */
 	public LibraryItem() {
-		// TODO Auto-generated constructor stub
 	}
 
 	
@@ -28,75 +25,93 @@ abstract public class LibraryItem implements OutputStrategy{
 	 * @param code
 	 * @param title
 	 * @param pubDate
-	 * @param onLoan
 	 */
-	public LibraryItem(String code, String title, Date pubDate, boolean onLoan) {
+	public LibraryItem(String code, String title, Date pubDate) {
 		super();
 		this.code 		= code;
 		this.title 		= title;
 		this.pubDate 	= pubDate;
-		this.onLoan 	= onLoan;
 	}
 
 
 
 
+	/**
+	 * @return
+	 */
 	public String getCode() {
 		return code;
 	}
 
-/*	
-	public static String getTypeForDisplay() {
-		return "need to be overridden in child classes";
-	}
-*/
 	
+	/**
+	 * @param aCode
+	 */
 	public void setCode(String aCode) {
 		this.code = aCode;
 	}
 
 
+	/**
+	 * @return
+	 */
 	public String getTitle() {
 		return title;
 	}
 
 
+	/**
+	 * @param aTitle
+	 */
 	public void setTitle(String aTitle) {
 		this.title = aTitle;
 	}
 
 
+	/**
+	 * @return
+	 */
 	public Date getPubDate() {
 		return pubDate;
 	}
 
 
+	/**
+	 * @param aPubDate
+	 */
 	public void setPubDate(Date aPubDate) {
 		this.pubDate = aPubDate;
 	}
 
 
+	/**
+	 * @return
+	 */
 	public boolean isOnLoan() {
 		LibraryRepository lib = LibraryRepository.getInstance();
 		Loans loans = lib.getLoans();
 		return loans.isItemOnLoan(getCode());
-//		return onLoan;
 	}
 
-
-//	public void setOnLoan(boolean onLoanVal) {
-//		this.onLoan = onLoanVal;
-//	}
-
+	
+	/**
+	 * @param libItemForm
+	 */
 	abstract public void editWithForm(Form libItemForm);
 
 	
+	/**
+	 * @param libItemForm
+	 */
 	public void editWithFormPre(Form libItemForm) {
 		libItemForm.addField("code", "Library Code", getCode());
 		libItemForm.addField("title", "Book Title", getTitle());
 		libItemForm.addField("pubdate", "Publish Date", getPubDate());		
 	}
 	
+	/**
+	 * @param libItemForm
+	 */
 	public void editWithFormPost(Form libItemForm) {
 		String newCode = (String) libItemForm.getFieldValue("code");
 		String newTitle = (String) libItemForm.getFieldValue("title");

@@ -4,6 +4,8 @@
 package library;
 
 /**
+ * Iterator Interface
+ * 
  * @author johnwarde
  *
  */

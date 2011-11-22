@@ -9,11 +9,17 @@ public class LibraryRepository {
     private int lastLibraryId = 0;
 	private Loans loans;
  
+    /**
+     * @return
+     */
     public static LibraryRepository getInstance() {
             return instance;
     }        
         
     // Private constructor prevents instantiation from other classes
+    /**
+     * 
+     */
     private LibraryRepository() { 
     	lib = new Catalog();
     	users = new Members();
@@ -21,14 +27,23 @@ public class LibraryRepository {
     	loadData();
     }
     
+    /**
+     * @return
+     */
     public Catalog getCatalog() {
     	return lib;
     }
     
+    /**
+     * @return
+     */
     public Members getUsers() {
     	return users;
     }
     
+	/**
+	 * @return
+	 */
 	public Loans getLoans() {
 		return loans;
 	}    
@@ -40,18 +55,21 @@ public class LibraryRepository {
 		return lastLibraryId++;
 	}
 
+	/**
+	 * Loads test data
+	 */
 	private void loadData() {
 		Object[][] csv = {
-				 // Type,  code,    onLoan, pubDate,      title,        author,       publisherName, edition, 
-				 {"Book", "SKU001", false, "01/01/2011", "First Book",  "John Warde", "O'Reilly",    1},
-				 {"Book", "SKU002", false, "01/01/2011", "Second Book", "Brian Warde", "O'Reilly",   2},
+				 // Type,  code,    pubDate,      title,        author,       publisherName, edition, 
+				 {"Book", "SKU001", "01/04/1999", "Catch 22",  "Joseph Heller", "Simon & Schuster",    1},
+				 {"Book", "SKU002", "02/03/2006", "Second Book", "Brian Warde", "O'Reilly",   2},
 				 
-				 // Type,  code,    onLoan, pubDate,      title,     artist, genre
-				 {"DVD",  "SKU003", false, "12/11/2001", "Monster", "REM",   "Rock"},
-				 {"DVD",  "SKU004", false, "12/11/2001", "One Tree Hill", "U2",   "Rock"},
+				 // Type,  code,    pubDate,      title,     artist, genre
+				 {"DVD",  "SKU003", "12/11/2001", "Monster", "REM",   "Pop"},
+				 {"DVD",  "SKU004", "22/07/1980", "One Tree Hill", "U2",   "Rock"},
 				 
-				 // Type,            code,     onLoan, pubDate,     title,       author,  periodicalName
-				 {"Periodical",  "SKU005", false, "12/04/1996", "Quick one", "Steorn",   "Steorn Monthly"}
+				 // Type,         code,     pubDate,     title,       author,  periodicalName
+				 {"Periodical",  "SKU005", "12/04/1996", "Business Week", "Simon Shaw",   "McGraw-Hill"}
 		};
 		LibraryItem item;
 		for (Object[] record : csv) {
