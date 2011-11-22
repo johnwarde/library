@@ -47,7 +47,7 @@ public class Loans {
 				results.add(searchCode);
 			}
         }
-        return (String[]) results.toArray();
+        return results.toArray(new String[results.size()]) ;
 	}
 
 	public int getUserIdForLoanItem(String libCode) {

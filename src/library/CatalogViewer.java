@@ -41,5 +41,24 @@ public abstract class CatalogViewer {
 		}
 		return newItems;
 	}
+
+	public static Catalog itemsByList(Catalog items, String[] loanItemIds) {
+		Catalog newItems = new Catalog();
+		items.first();
+		LibraryItem item;
+		String itemCode;
+		while (items.hasNext()) {
+			item = items.getCurrent();
+			itemCode = item.getCode();
+			for (String code : loanItemIds) {
+				if (code.equals(itemCode)) {
+					newItems.add(item);
+				}				
+			}
+
+			items.next();
+		}
+		return newItems;
+	}
 	
 }

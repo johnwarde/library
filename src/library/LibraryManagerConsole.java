@@ -161,15 +161,19 @@ public class LibraryManagerConsole {
 				String.format("\r\n\r\n\t %s has not yet been implemented, returning you to the previous menu", optionSelected));
 	}
 
-	private void catalogListItems(Catalog items) {
-
+	private boolean catalogListItems(Catalog items) {
+		catalogListItems(items, false);
+		return false;
+	}
+	
+    private boolean catalogListItems(Catalog items, boolean catalogNeedRefresh) {
 		int itemChoosen = -1;
 		int menuChoice  = -1;
 		while (itemChoosen != 0) {
 			if (0 == items.size()) {
 				System.out.println();
 				System.out.println("There are no items to list, returning you to the previous menu.");
-				return;
+				return false;
 			}			
 			System.out.print(String.format("\r\n\r\n" + 
 				"Choice Library  On                                        Author/\r\n" + 
@@ -198,9 +202,7 @@ public class LibraryManagerConsole {
 			if (selected.isOnLoan()) {
 				menuOptions = new String[] {
 						"Return to previous menu",
-						"Check-in", 
-						"Edit item", 
-						"Delete item"};
+						"Check-in"};
 			} else {
 				menuOptions = new String[] {
 						"Return to previous menu", 
@@ -220,15 +222,17 @@ public class LibraryManagerConsole {
 						break;				
 					case 1:
 						if (selected.isOnLoan()) {
-							// TODO: Check-in
 							itemCheckIn(selected);
 						} else {
 							itemCheckOut(selected);
 						}
+						if (catalogNeedRefresh) {
+							System.out.println("Issuing a refresh");
+							return true;
+						}
 						break;
 					case 2:
 						editLibraryItem(selected);
-						// TODO: maybe just need to go back to list of items
 						break;					
 					case 3:
 						deleteLibraryItem(selected, items);
@@ -239,6 +243,7 @@ public class LibraryManagerConsole {
 				}
 			}
 		}
+		return false;
 	}
 
 
@@ -304,7 +309,7 @@ public class LibraryManagerConsole {
 	}	
 
 	private void editLibraryItem(LibraryItem selected) {
-		if (selected.onLoan) {
+		if (selected.isOnLoan()) {
 			System.out.println();			
 			System.out.println("You cannot edit an item that is out on loan, ");
 			System.out.println("returning you to the previous menu");
@@ -350,11 +355,17 @@ public class LibraryManagerConsole {
 	}	
 	
 	private void deleteLibraryItem(LibraryItem selected, Catalog subset) {
+		if (selected.isOnLoan()) {
+			System.out.println();
+			System.out.println("Library item cannot be deleted whilst out on loan, ");
+			System.out.println("returning you to the previous menu.");
+			System.out.println();
+		}
 		Confirmation ui = new Confirmation("Are you sure you want to delete this library item? (y/n)");
 		if (ui.getUserChoice()) {
 			subset.remove(selected);
-			LibraryRepository lib =  LibraryRepository.getInstance();
-			Catalog items = lib.getCatalog();
+			LibraryRepository lib = LibraryRepository.getInstance();
+			Catalog items = lib.getCatalog();					
 			if (subset != items) {
 				items.remove(selected);				
 			}
@@ -365,31 +376,26 @@ public class LibraryManagerConsole {
 		Menu usersMenu = new Menu("Library Users", 
 				new String[] {"Return to previous menu", 
 							  "List all users", 
-							  "List users with loans", 
 							  "Add user"});
 		int choice = -1;
 		while (choice != 0) {
 			System.out.print(usersMenu.getMenuToDisplay());
 			choice = usersMenu.getUserSelection();
 			switch (choice) {
+				case 0:
+					// Return to main menu
+					break;			
 				case 1:
 					// List all users	
 					LibraryRepository lib = LibraryRepository.getInstance();
 					Members members = lib.getUsers();						
 					usersList(members);
 					break;
-//				case 2:
-//					// List users with loans
-//					Members usersWithLoans = MembersViewer.usersWithLoans();
-//					usersList(members);
-//					break;
-				case 3:
+				case 2:
 					// Add user
 					userAdd();
 					break;					
-				case 0:
-					// Return to main menu
-					break;
+
 				default:
 					placeHolderHelper(usersMenu.getSelectedText(choice));
 					break;					
@@ -399,6 +405,10 @@ public class LibraryManagerConsole {
 
 
 	private void usersList(Members users) {
+		LibraryRepository lib =  LibraryRepository.getInstance();
+		Loans loans = lib.getLoans();
+		String[] loanItemIdsForUser;
+		String[] menuOptions;
 		int itemChoosen = -1;
 		int menuChoice  = -1;
 		while (itemChoosen != 0) {
@@ -430,11 +440,22 @@ public class LibraryManagerConsole {
 			User selected = users.getIndex(itemChoosen - 1);
 			System.out.println(selected.toConsoleFull());
 			
-			Menu menu = new Menu("Select User Menu", new String[] {
-					"Return to previous menu", 
-					"List all library items on loan",
-					"Edit User", 
-					"Delete User"});
+			loanItemIdsForUser = loans.getLoanItemsForUser(selected.getLibraryId());
+			if (0 == loanItemIdsForUser.length) {
+				// user has no loans
+				menuOptions = new String[] {
+						"Return to previous menu", 
+						"Edit User", 
+						"Delete User"};
+			} else {
+				// user has loans
+				menuOptions = new String[] {
+						"Return to previous menu", 
+						"Edit User",
+						"Delete User", 
+						"List all library items on loan"};
+			}
+			Menu menu = new Menu("Select User Menu", menuOptions);
 			menuChoice = -1;
 			while (menuChoice < 0 || menuChoice > 3) {
 				System.out.print(menu.getMenuToDisplay());
@@ -444,14 +465,15 @@ public class LibraryManagerConsole {
 						// Return to previous menu
 						break;				
 					case 1:
-						// List all library items on loan
-						break;
-					case 2:
 						editUser(selected);
 						break;					
-					case 3:
+					case 2:
 						deleteUser(selected, users);
-						break;	
+						break;
+					case 3:
+						// List all library items on loan
+						userListLoans(selected, loanItemIdsForUser);
+						break;						
 					default:
 						placeHolderHelper(menu.getSelectedText(menuChoice));
 						break;					
@@ -461,6 +483,20 @@ public class LibraryManagerConsole {
 		
 	}
 
+
+	private void userListLoans(User selected, String[] loanItemIdsForUser) {
+		LibraryRepository lib =  LibraryRepository.getInstance();
+		Catalog items = lib.getCatalog();
+		Loans loans = lib.getLoans();
+		boolean refreshCatalog = true;
+		while (refreshCatalog) {
+			Catalog loanList = CatalogViewer.itemsByList(items, loanItemIdsForUser);
+			refreshCatalog = catalogListItems(loanList, true);
+			if (refreshCatalog) {
+				loanItemIdsForUser = loans.getLoanItemsForUser(selected.getLibraryId());
+			}
+		}
+	}
 
 	private void userAdd() {
 		Form userDetailsForm = new Form("New User", true);
