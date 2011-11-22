@@ -9,7 +9,7 @@ import java.io.Console;
  * @author johnwarde
  *
  */
-public class Prompt {
+public class Prompt extends ConsoleComponent {
 	String message;
 	
 	public Prompt(String promptMessage) {

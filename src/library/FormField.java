@@ -7,7 +7,7 @@ package library;
  * @author johnwarde
  *
  */
-abstract public class FormField {
+abstract public class FormField extends ConsoleComponent {
 	protected String uiId;
 	protected String label;
 	

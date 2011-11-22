@@ -11,7 +11,7 @@ import java.io.Console;
  * @author johnwarde
  *
  */
-public class Menu {
+public class Menu extends ConsoleComponent {
 	private String menuTitle = "";
 	private String[] menuOptions;
 

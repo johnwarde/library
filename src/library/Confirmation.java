@@ -9,7 +9,7 @@ import java.io.Console;
  * @author johnwarde
  *
  */
-public class Confirmation {
+public class Confirmation extends ConsoleComponent {
 	String askMessage;
 	
 	public Confirmation(String confirmMessage) {

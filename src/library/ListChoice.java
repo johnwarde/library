@@ -2,20 +2,13 @@ package library;
 
 import java.io.Console;
 
-public class ListChoice {
-//	private String[] menuOptions;
+public class ListChoice extends ConsoleComponent {
 	private int noOfItems;
 	
 	public ListChoice(int noOfItems) {
-		//ListChoice(noOfChoices, new String[] {"Return to previous menu", "test"});
 		this.noOfItems = noOfItems;
 		
 	}
-	/*
-	public ListChoice(int noOfChoices, String[] menuOptions) {
-		this.noOfChoices = noOfChoices;
-	}
-	*/
 	
 	public String getMenuToDisplay() {
 		return String.format("\r\nPlease enter an entry number (1-%d) from the list above\r\nOR 0 to return to previous menu.\r\n", noOfItems);

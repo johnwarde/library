@@ -13,7 +13,7 @@ import java.util.Date;
  * @author johnwarde
  *
  */
-public class Form {
+public class Form extends ConsoleComponent {
 	private boolean isNewData;
 	private ArrayList<FormField> fieldDefs = new ArrayList<FormField>();
 	private String title;
